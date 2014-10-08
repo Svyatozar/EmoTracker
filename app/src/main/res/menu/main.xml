@@ -1,11 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity" >
-    <item android:id="@+id/action_example"
-        android:title="@string/action_example"
-        android:showAsAction="withText|ifRoom" />
-    <item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never" />
+
+    <item android:id="@+id/action_power_on"
+          android:title="@string/action_connect"
+          android:icon="@android:drawable/stat_sys_data_bluetooth"
+          android:showAsAction="withText|ifRoom" />
+
+    <item android:id="@+id/action_power_off"
+          android:title="@string/power_off"
+          android:icon="@android:drawable/ic_lock_power_off"
+          android:showAsAction="withText|ifRoom" />
 </menu>

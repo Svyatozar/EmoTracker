@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:padding="@dimen/activity_horizontal_margin">
+
+    <LinearLayout
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#AFEEEE"
+        android:padding ="@dimen/activity_half_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Пульс (bpm)"/>
+
+            <TextView
+                android:id="@+id/pulseCounter"
+                android:paddingLeft="@dimen/activity_half_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="80"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#AFEEEE"
+        android:padding ="@dimen/activity_half_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Стресс (баллы)"/>
+
+            <TextView
+                android:id="@+id/stressCounter"
+                android:paddingLeft="@dimen/activity_half_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="230"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#AFEEEE"
+        android:padding ="@dimen/activity_half_margin"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/acTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Активность"/>
+            <TextView
+                android:id="@+id/activityCounter"
+                android:paddingLeft="@dimen/activity_half_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20%"
+                android:layout_toRightOf="@+id/acTitle"/>
+
+            <TextView
+                android:id="@+id/stepTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Шаги"
+                android:paddingRight="@dimen/activity_half_margin"
+                android:layout_toLeftOf="@+id/stepCounter"/>
+
+            <TextView
+                android:id="@+id/stepCounter"
+                android:paddingLeft="@dimen/activity_half_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3452"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

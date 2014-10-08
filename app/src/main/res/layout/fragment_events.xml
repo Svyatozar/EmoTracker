@@ -12,16 +12,17 @@
         android:text="@string/device_is_ok"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:paddingTop="@dimen/activity_half_margin"
         android:paddingBottom="@dimen/activity_half_margin"
         android:gravity="center"/>
 
     <ListView
+        android:id="@+id/eventsListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:layout_marginBottom="@dimen/activity_half_margin"
-        android:dividerHeight="@dimen/activity_half_margin">
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:dividerHeight="@dimen/activity_half_margin"
+        android:divider="@android:color/white">
     </ListView>
 
     <LinearLayout

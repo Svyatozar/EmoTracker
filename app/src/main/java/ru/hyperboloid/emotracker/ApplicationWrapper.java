@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 
 import com.android.volley.toolbox.Volley;
 
+import ru.hyperboloid.emotracker.util.DataBaseWrapper;
 import ru.hyperboloid.emotracker.util.NetworkUtil;
 import ru.hyperboloid.emotracker.util.SettingsProvider;
 
@@ -14,8 +15,8 @@ public class ApplicationWrapper extends Application
     private volatile static ApplicationWrapper instance;
 
     private static NetworkUtil networkUtil;
-
     private static SettingsProvider settingsProvider;
+    private static DataBaseWrapper dataBaseWrapper;
 
     private static Context context;
 
@@ -33,6 +34,7 @@ public class ApplicationWrapper extends Application
 
         context = getApplicationContext();
 
+        dataBaseWrapper = new DataBaseWrapper(context);
         networkUtil = new NetworkUtil(Volley.newRequestQueue(context));
         settingsProvider = new SettingsProvider(context);
     }
@@ -47,10 +49,13 @@ public class ApplicationWrapper extends Application
     {
         return networkUtil;
     }
-
     public static SettingsProvider getSettingsProvider()
     {
         return settingsProvider;
+    }
+    public static DataBaseWrapper getDataBaseWrapper()
+    {
+        return dataBaseWrapper;
     }
 
     public static Context getContext()

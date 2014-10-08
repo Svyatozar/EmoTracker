@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:padding="@dimen/activity_horizontal_margin">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#AFEEEE"
+                android:padding ="@dimen/activity_half_margin">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pulse_threshold"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Switch
+                        android:id="@+id/pulseAttentionSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ВНИМАНИЕ"/>
+
+                    <TextView
+                        android:id="@+id/pulseAttentionText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right|center_vertical"
+                        android:text="0"
+                        android:textSize="18sp"/>
+
+                </LinearLayout>
+
+                <SeekBar
+                    android:id="@+id/pulseAttentionSeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/activity_half_margin"
+                    android:max="200"
+                    android:progress="1"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/white"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_half_margin">
+
+                    <Switch
+                        android:id="@+id/pulseAlertSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ТРЕВОГА     "/>
+
+                    <TextView
+                        android:id="@+id/pulseAlertText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right|center_vertical"
+                        android:text="0"
+                        android:textSize="18sp"/>
+
+                </LinearLayout>
+
+                <SeekBar
+                    android:id="@+id/pulseAlertSeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:max="200"
+                    android:progress="1"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#AFEEEE"
+                android:padding ="@dimen/activity_half_margin"
+                android:layout_marginTop="@dimen/activity_horizontal_margin">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stress_threshold"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Switch
+                        android:id="@+id/stressAttentionSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ВНИМАНИЕ"/>
+
+                    <TextView
+                        android:id="@+id/stressAttentionText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right|center_vertical"
+                        android:text="0"
+                        android:textSize="18sp"/>
+
+                </LinearLayout>
+
+                <SeekBar
+                    android:id="@+id/stressAttentionSeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/activity_half_margin"
+                    android:max="700"
+                    android:progress="5"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/white"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_half_margin">
+
+                    <Switch
+                        android:id="@+id/stressAlertSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ТРЕВОГА     "/>
+
+                    <TextView
+                        android:id="@+id/stressAlertText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right|center_vertical"
+                        android:text="0"
+                        android:textSize="18sp"/>
+
+                </LinearLayout>
+
+                <SeekBar
+                    android:id="@+id/stressAlertSeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:max="700"
+                    android:progress="5"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#AFEEEE"
+                android:padding ="@dimen/activity_half_margin"
+                android:layout_marginTop="@dimen/activity_horizontal_margin">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/step_threshold"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Switch
+                        android:id="@+id/stepAttentionSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ВНИМАНИЕ"/>
+
+                    <TextView
+                        android:id="@+id/stepAttentionText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right|center_vertical"
+                        android:text="0"
+                        android:textSize="18sp"/>
+
+                </LinearLayout>
+
+                <SeekBar
+                    android:id="@+id/stepAttentionSeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/activity_half_margin"
+                    android:max="100000"
+                    android:progress="500"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/white"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_half_margin">
+
+                    <Switch
+                        android:id="@+id/stepNormSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="НОРМА        "/>
+
+                    <TextView
+                        android:id="@+id/stepNormText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right|center_vertical"
+                        android:text="0"
+                        android:textSize="18sp"/>
+
+                </LinearLayout>
+
+                <SeekBar
+                    android:id="@+id/stepNormSeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:max="200"
+                    android:progress="1"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#AFEEEE"
+                android:padding ="@dimen/activity_half_margin"
+                android:layout_marginTop="@dimen/activity_horizontal_margin">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/activity_threshold"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Switch
+                        android:id="@+id/activityAttentionSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ВНИМАНИЕ"/>
+
+                    <TextView
+                        android:id="@+id/activityAttentionText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right|center_vertical"
+                        android:text="0"
+                        android:textSize="18sp"/>
+
+                </LinearLayout>
+
+                <SeekBar
+                    android:id="@+id/activityAttentionSeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/activity_half_margin"
+                    android:max="200"
+                    android:progress="1"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/white"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_half_margin">
+
+                    <Switch
+                        android:id="@+id/activityNormSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="НОРМА        "/>
+
+                    <TextView
+                        android:id="@+id/activityNormText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right|center_vertical"
+                        android:text="0"
+                        android:textSize="18sp"/>
+
+                </LinearLayout>
+
+                <SeekBar
+                    android:id="@+id/activityNormSeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:max="200"
+                    android:progress="1"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#AFEEEE"
+                android:padding ="@dimen/activity_half_margin"
+                android:layout_marginTop="@dimen/activity_horizontal_margin">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="СЕТКА ВРЕМЕНИ: "/>
+
+                    <TextView
+                        android:id="@+id/timeStepText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right|center_vertical"
+                        android:text="0"
+                        android:textSize="18sp"/>
+
+                </LinearLayout>
+
+
+                <SeekBar
+                    android:id="@+id/timeStepSeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:max="20"
+                    android:progress="1"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#AFEEEE"
+                android:padding ="@dimen/activity_half_margin"
+                android:layout_marginTop="@dimen/activity_horizontal_margin">
+
+                <Switch
+                    android:id="@+id/autoEventsSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="АВТОМА-\nТИЧЕСКИЕ\nСОБЫТИЯ"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ToggleButton
+                        android:id="@+id/soundButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ЗВУК"
+                        android:textOff="ЗВУК"
+                        android:textOn="ЗВУК"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_horizontal"/>
+
+                    <ToggleButton
+                        android:id="@+id/vibroButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ВИБРО"
+                        android:textOn="ВИБРО"
+                        android:textOff="ВИБРО"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_horizontal"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
