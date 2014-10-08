@@ -21,6 +21,7 @@ public class RegisterActivity extends Activity
     private TextView name;
     private TextView age;
     private TextView gender;
+    private TextView email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,9 +33,10 @@ public class RegisterActivity extends Activity
         name = (TextView)findViewById(R.id.name);
         age = (TextView)findViewById(R.id.age);
         gender = (TextView)findViewById(R.id.gender);
+        email = (TextView)findViewById(R.id.email);
 
-        Button register = (Button)findViewById(R.id.registerButton);
-        Button goButton = (Button)findViewById(R.id.goButton);
+        final Button register = (Button)findViewById(R.id.registerButton);
+        final Button goButton = (Button)findViewById(R.id.goButton);
 
         register.setOnClickListener(new View.OnClickListener()
         {
@@ -43,7 +45,10 @@ public class RegisterActivity extends Activity
                 @Override
                 public void onCallback(boolean isSuccess)
                 {
-                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                    goButton.setEnabled(true);
+                    register.setEnabled(false);
+
+                    ApplicationWrapper.getSettingsProvider().writeLogin(login.getText().toString());
                 }
             };
 
@@ -54,9 +59,28 @@ public class RegisterActivity extends Activity
                                                                       name.getText().toString(),
                                                                       age.getText().toString(),
                                                                       gender.getText().toString(),
+                                                                      email.getText().toString(),
                                                                       callback);
             }
         });
+
+        goButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+            }
+        });
+
+        if (null != ApplicationWrapper.getSettingsProvider().getLogin())
+        {
+            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+        }
+        else
+        {
+            getActionBar().setTitle(getString(R.string.register));
+        }
     }
 
     @Override

@@ -21,7 +21,6 @@
 
         <activity
             android:name=".activity.RegisterActivity"
-            android:label="@string/register"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

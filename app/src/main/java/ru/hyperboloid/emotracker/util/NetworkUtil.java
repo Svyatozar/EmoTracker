@@ -1,6 +1,7 @@
 package ru.hyperboloid.emotracker.util;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -14,6 +15,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import ru.hyperboloid.emotracker.ApplicationWrapper;
 import ru.hyperboloid.emotracker.interfaces.BooleanCallback;
 
 public class NetworkUtil
@@ -21,7 +23,7 @@ public class NetworkUtil
     private static final String SERVER_NAME = "http://emo.forkme.ru/emotracker-api/api/";
 
     private static final String CREATE_TOKEN = "tokens/create";
-    private static final String CREATE_USER = "users/create";
+    private static final String CREATE_USER = "users";
 
     private RequestQueue queue;
 
@@ -30,7 +32,7 @@ public class NetworkUtil
         this.queue = queue;
     }
 
-    public void doRegisterRequest(final String login, final String name, final String age, final String gender, final BooleanCallback callback)
+    public void doRegisterRequest(final String login, final String name, final String age, final String gender, final String email, final BooleanCallback callback)
     {
         JSONObject voidObj = null;
 
@@ -50,9 +52,7 @@ public class NetworkUtil
                     public void onResponse(JSONObject response)
                     {
                         Log.d("LOG", "Response " + response.toString());
-                        getRegister(login, name, age, gender, response);
-
-                        callback.onCallback(true);
+                        getRegister(login, name, age, gender, email, response, callback);
                     }
                 },
                 new Response.ErrorListener()
@@ -79,7 +79,7 @@ public class NetworkUtil
         queue.add(postRequest);
     }
 
-    private void getRegister(final String login, final String name, String age, String gender, final JSONObject tokenInfo)
+    private void getRegister(final String login, final String name, String age, String gender, final String email, final JSONObject tokenInfo, final BooleanCallback callback)
     {
         String tokenId = null;
         String key = null;
@@ -105,34 +105,46 @@ public class NetworkUtil
         catch (JSONException e)
         {}
 
+        final String finalTokenId = tokenId;
+        final String finalKey = key;
+        final String finalToken = token;
+
         Map<String, String>  params = new HashMap<String, String>();
         params.put("fullName", name);
         params.put("userName", login);
         params.put("password", "00000");
-        params.put("email", "testmail@mail.mail");
-        params.put("tokenId", tokenId);
-        params.put("key", key);
-        params.put("token", token);
+        params.put("email", email);
+        params.put("tokenId", finalTokenId);
+        params.put("key", finalKey);
+        params.put("token", finalToken);
 
-        JSONObject parameters = new JSONObject(params);
+        JSONObject data = new JSONObject(params);
 
-        Log.i("LOG", "JSON: " + parameters.toString());
+        Log.i("LOG", data.toString());
 
-        JsonObjectRequest registerRequest = new JsonObjectRequest(Request.Method.POST, SERVER_NAME + CREATE_USER, parameters,
+        JsonObjectRequest registerRequest = new JsonObjectRequest(Request.Method.POST, SERVER_NAME + CREATE_USER, data,
                 new Response.Listener<JSONObject>()
                 {
                     @Override
                     public void onResponse(JSONObject response)
                     {
                         Log.d("LOG", "Response " + response.toString());
+                        callback.onCallback(true);
                     }
                 },
                 new Response.ErrorListener()
                 {
                     @Override
-                    public void onErrorResponse(VolleyError error)
+                    public void onErrorResponse(VolleyError volleyError)
                     {
-                        Log.d("LOG", "Error.Response" + error.toString());
+                        Log.d("LOG", "Error.Response" + volleyError.toString());
+
+                        if(volleyError.networkResponse != null && volleyError.networkResponse.data != null)
+                        {
+                            Log.d("LOG", "Error.Response " + new String(volleyError.networkResponse.data));
+                        }
+
+                        Toast.makeText(ApplicationWrapper.getContext(), "Ошибка при создании пользователя! Проверьте, все ли поля заполнены верно.", Toast.LENGTH_SHORT).show();
                     }
                 }
         )
@@ -140,14 +152,29 @@ public class NetworkUtil
             @Override
             public Map<String, String> getHeaders()
             {
-                Map<String, String>  params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<String, String>();
                 params.put("Accept", "application/json");
                 params.put("Content-Type", "application/json");
 
                 return params;
             }
+
+//            @Override
+//            protected Map<String, String> getParams()
+//            {
+//                Map<String, String>  params = new HashMap<String, String>();
+//                params.put("fullName", name);
+//                params.put("userName", login);
+//                params.put("password", "00000");
+//                params.put("email", email);
+//                params.put("tokenId", finalTokenId);
+//                params.put("key", finalKey);
+//                params.put("token", finalToken);
+//
+//                return params;
+//            }
         };
 
-        //queue.add(registerRequest);
+        queue.add(registerRequest);
     }
 }
