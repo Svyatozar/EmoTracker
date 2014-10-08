@@ -80,54 +80,6 @@ public class HomeActivity extends Activity {
 //                    .replace(R.id.action_example, statusFragment)
 //                    .commit();
 
-
-
-
-//            httppost.setHeader("Accept", "application/json");
-//            httppost.setHeader("Content-Type", "application/json");
-
-
-            //        AsyncTask<Void, Void, Void> asyncTask = new AsyncTask<Void, Void, Void>()
-//        {
-//            @Override
-//            protected Void doInBackground(Void... voids)
-//            {
-//                // Create a new HttpClient and Post Header
-//                HttpClient httpclient = new DefaultHttpClient();
-//                HttpPost httppost = new HttpPost(SERVER_NAME + CREATE_TOKEN);
-//
-//                try
-//                {
-//                    httppost.setEntity(new StringEntity("{}"));
-//                    httppost.setHeader("Accept", "application/json");
-//                    httppost.setHeader("Content-Type", "application/json");
-//
-//                    // Execute HTTP Post Request
-//                    HttpResponse response = httpclient.execute(httppost);
-//
-//                    HttpEntity res = new BufferedHttpEntity(response.getEntity());
-//
-//                    InputStream inputStream = res.getContent();
-//
-//                    BufferedReader r = new BufferedReader(new InputStreamReader(inputStream));
-//                    StringBuilder total = new StringBuilder();
-//                    String line;
-//                    while ((line = r.readLine()) != null) {
-//                        total.append(line);
-//                    }
-//
-//                    Log.i("LOG", "ANSWER: " + total.toString());
-//
-//                } catch (ClientProtocolException e) {
-//                    // TODO Auto-generated catch block
-//                } catch (IOException e) {
-//                    // TODO Auto-generated catch block
-//                }
-//
-//                return null;
-//            }
-//        }.execute();
-
             Message msg = Message.obtain(null, BluetoothService.MESSAGE_REGISTER, 0, 0);
             msg.replyTo = clientMessenger;
 
@@ -149,7 +101,8 @@ public class HomeActivity extends Activity {
         }
 
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(Message msg)
+        {
             switch (msg.what) {
                 case BluetoothService.MESSAGE_BLUETOOTH_CONNECTED:
                     connectionDialog.dismiss();

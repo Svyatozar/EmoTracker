@@ -50,7 +50,10 @@ public class BluetoothService extends Service {
     ListenerThread listenerThread;
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
+    public int onStartCommand(Intent intent, int flags, int startId)
+    {
+        Log.i("LOG", "ON_START_COMMAND");
+
         BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
         if (btAdapter == null) {
             Toast.makeText(getBaseContext(), R.string.no_bluetooth_message, Toast.LENGTH_SHORT).show();
@@ -65,7 +68,15 @@ public class BluetoothService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
+        Log.i("LOG", "ON_BIND");
         return serviceMessenger.getBinder();
+    }
+
+    @Override
+    public void onDestroy()
+    {
+        Log.i("LOG", "service done");
+        Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show();
     }
 
     public synchronized void writeCommand(AbstractCommand command) {
@@ -94,10 +105,13 @@ public class BluetoothService extends Service {
 
     class IncomingHandler extends Handler {
         @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == MESSAGE_REGISTER) {
+        public void handleMessage(Message msg)
+        {
+            if (msg.what == MESSAGE_REGISTER)
+            {
                 clientMessenger = msg.replyTo;
-            } else if (socket != null && socket.isConnected()) {
+            }
+            else if (socket != null && socket.isConnected()) {
                 switch (msg.what) {
                     case BinaryUtil.COMMAND_GET_RATES:
                         writeCommand(new GetStatusCommand());

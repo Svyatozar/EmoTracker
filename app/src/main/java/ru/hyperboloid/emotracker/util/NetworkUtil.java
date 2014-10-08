@@ -17,6 +17,7 @@ import java.util.Map;
 
 import ru.hyperboloid.emotracker.ApplicationWrapper;
 import ru.hyperboloid.emotracker.interfaces.BooleanCallback;
+import ru.hyperboloid.emotracker.model.Event;
 
 public class NetworkUtil
 {
@@ -24,6 +25,7 @@ public class NetworkUtil
 
     private static final String CREATE_TOKEN = "tokens/create";
     private static final String CREATE_USER = "users";
+    private static final String CREATE_EVENT = "data/saveDataEvent ";
 
     private RequestQueue queue;
 
@@ -129,7 +131,25 @@ public class NetworkUtil
                     public void onResponse(JSONObject response)
                     {
                         Log.d("LOG", "Response " + response.toString());
-                        callback.onCallback(true);
+
+                        String loginId = null;
+
+                        try
+                        {
+                            JSONObject object = response.getJSONObject("result");
+                            loginId = object.getString("id");
+                            Log.d("LOG", "LOGIN ID =  " + loginId);
+                        }
+                        catch (JSONException e)
+                        {
+                            Log.e("LOG", e.getMessage().toString());
+                        }
+
+                        if (null != loginId)
+                        {
+                            ApplicationWrapper.getSettingsProvider().writeLogin(loginId);
+                            callback.onCallback(true);
+                        }
                     }
                 },
                 new Response.ErrorListener()
@@ -158,21 +178,69 @@ public class NetworkUtil
 
                 return params;
             }
+        };
 
-//            @Override
-//            protected Map<String, String> getParams()
-//            {
-//                Map<String, String>  params = new HashMap<String, String>();
-//                params.put("fullName", name);
-//                params.put("userName", login);
-//                params.put("password", "00000");
-//                params.put("email", email);
-//                params.put("tokenId", finalTokenId);
-//                params.put("key", finalKey);
-//                params.put("token", finalToken);
-//
-//                return params;
-//            }
+        queue.add(registerRequest);
+    }
+
+    public void addEvent(Event event)
+    {
+        // TODO
+    }
+
+    public void addEvent(int pulse, int stress, int activity, int steps)
+    {
+        Log.i("LOG", "ADD EVENT: " + pulse);
+
+        Map<String, String>  params = new HashMap<String, String>();
+        params.put("userId", ApplicationWrapper.getSettingsProvider().getLogin());
+        params.put("name", "TEST");
+        params.put("startDate", "2014-10-09");
+        params.put("endDate", "2014-10-09");
+        params.put("type_id", "0");
+        params.put("isAuto", "true");
+
+        params.put("puls", String.valueOf(pulse));
+        params.put("stress", String.valueOf(stress));
+        params.put("activity", String.valueOf(activity));
+
+        JSONObject data = new JSONObject(params);
+
+        Log.i("LOG", data.toString());
+
+        JsonObjectRequest registerRequest = new JsonObjectRequest(Request.Method.POST, SERVER_NAME + CREATE_EVENT, data,
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response)
+                    {
+                        Log.d("LOG", "Response " + response.toString());
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError)
+                    {
+                        Log.d("LOG", "Error.Response" + volleyError.toString());
+
+                        if(volleyError.networkResponse != null && volleyError.networkResponse.data != null)
+                        {
+                            Log.d("LOG", "Error.Response " + new String(volleyError.networkResponse.data));
+                        }
+                    }
+                }
+        )
+        {
+            @Override
+            public Map<String, String> getHeaders()
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Accept", "application/json");
+                params.put("Content-Type", "application/json");
+
+                return params;
+            }
         };
 
         queue.add(registerRequest);

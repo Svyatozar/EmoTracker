@@ -15,8 +15,8 @@
 //import ru.hyperboloid.emotracker.util.BinaryUtil;
 //
 ///**
-// * Created by olshanikov on 9/24/14.
-// */
+//* Created by olshanikov on 9/24/14.
+//*/
 //public class StatusFragment extends Fragment {
 //
 //    TextView pulse;

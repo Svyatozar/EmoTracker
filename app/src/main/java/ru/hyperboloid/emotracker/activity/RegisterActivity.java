@@ -47,8 +47,6 @@ public class RegisterActivity extends Activity
                 {
                     goButton.setEnabled(true);
                     register.setEnabled(false);
-
-                    ApplicationWrapper.getSettingsProvider().writeLogin(login.getText().toString());
                 }
             };
 

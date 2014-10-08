@@ -29,8 +29,7 @@
                 android:id="@+id/pulseCounter"
                 android:paddingLeft="@dimen/activity_half_margin"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="80"/>
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -58,8 +57,7 @@
                 android:id="@+id/stressCounter"
                 android:paddingLeft="@dimen/activity_half_margin"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="230"/>
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -86,7 +84,6 @@
                 android:paddingLeft="@dimen/activity_half_margin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="20%"
                 android:layout_toRightOf="@+id/acTitle"/>
 
             <TextView
@@ -102,7 +99,6 @@
                 android:paddingLeft="@dimen/activity_half_margin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3452"
                 android:layout_alignParentRight="true"/>
         </RelativeLayout>
     </LinearLayout>
