@@ -27,6 +27,9 @@
     <string name="enter_gender">Пол</string>
     <string name="register">Регистрация</string>
     <string name="go">Далее</string>
+    <string name="device_is_ok">Устройство на руке</string>
+    <string name="record">Запись события</string>
+    <string name="start">Старт</string>
 
 
 </resources>

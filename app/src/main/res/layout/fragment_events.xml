@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+                android:padding="@dimen/activity_horizontal_margin">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/device_is_ok"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:paddingTop="@dimen/activity_half_margin"
+        android:paddingBottom="@dimen/activity_half_margin"
+        android:gravity="center"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginBottom="@dimen/activity_half_margin"
+        android:dividerHeight="@dimen/activity_half_margin">
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#AFEEEE"
+        android:paddingTop="@dimen/activity_half_margin"
+        android:paddingBottom="@dimen/activity_half_margin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_half_margin"
+            android:text="@string/record"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_half_margin"
+            android:text="00:00"
+            android:layout_weight="1"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/activity_half_margin"
+            android:text="@string/start"
+            android:background="#4682B4"/>
+
+    </LinearLayout>
+
+</LinearLayout>
