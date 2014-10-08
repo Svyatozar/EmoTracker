@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -16,7 +15,7 @@ import android.widget.ToggleButton;
 
 import ru.hyperboloid.emotracker.ApplicationWrapper;
 import ru.hyperboloid.emotracker.R;
-import ru.hyperboloid.emotracker.adapters.EventsAdapter;
+import ru.hyperboloid.emotracker.util.SettingsProvider;
 
 /**
  * Фрагмент с настройками
@@ -126,12 +125,58 @@ public class FragmentSettings extends Fragment
         connectTextToSeekBar(timeStepSeekBar, timeStepText);
         // NEXT BLOCK
         autoEventsSwitch = (Switch)rootView.findViewById(R.id.autoEventsSwitch);
+
         soundButton = (ToggleButton)rootView.findViewById(R.id.soundButton);
         vibroButton = (ToggleButton)rootView.findViewById(R.id.vibroButton);
 
         /**
          * Конец инициализации
          */
+
+        initSavedState(pulseAttentionSwitch);
+        initSavedState(stressAttentionSwitch);
+        initSavedState(stepAttentionSwitch);
+        initSavedState(activityAttentionSwitch);
+
+        timeStepSeekBar.setProgress(ApplicationWrapper.getSettingsProvider().getThresholdValue(SettingsProvider.TIME_STEP_VALUE));
+
+        autoEventsSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b)
+            {
+                soundButton.setEnabled(b);
+                vibroButton.setEnabled(b);
+
+                onCheckListener(compoundButton, b);
+            }
+        });
+
+        boolean isAutoEventsEnabled = ApplicationWrapper.getSettingsProvider().getSwitcherState(SettingsProvider.AUTO_EVENTS_SWITCHER_STATE);
+        autoEventsSwitch.setChecked(isAutoEventsEnabled);
+        soundButton.setEnabled(isAutoEventsEnabled);
+        vibroButton.setEnabled(isAutoEventsEnabled);
+
+        soundButton.setChecked(ApplicationWrapper.getSettingsProvider().getSwitcherState(SettingsProvider.IS_SOUND_USED));
+        vibroButton.setChecked(ApplicationWrapper.getSettingsProvider().getSwitcherState(SettingsProvider.IS_VIBRO_USED));
+
+        soundButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b)
+            {
+                ApplicationWrapper.getSettingsProvider().writeSwitcherState(SettingsProvider.IS_SOUND_USED, b);
+            }
+        });
+
+        vibroButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b)
+            {
+                ApplicationWrapper.getSettingsProvider().writeSwitcherState(SettingsProvider.IS_VIBRO_USED,b);
+            }
+        });
 
         return rootView;
     }
@@ -200,7 +245,41 @@ public class FragmentSettings extends Fragment
             {
                 switch (seekBar.getId())
                 {
+                    case R.id.pulseAttentionSeekBar:
+                        ApplicationWrapper.getSettingsProvider().writeThresholdValue(SettingsProvider.PULSE_ATTENTION_VALUE, Integer.valueOf(textView.getText().toString()));
+                        break;
 
+                    case R.id.pulseAlertSeekBar:
+                        ApplicationWrapper.getSettingsProvider().writeThresholdValue(SettingsProvider.PULSE_ALERT_VALUE, Integer.valueOf(textView.getText().toString()));
+                        break;
+
+                    case R.id.stressAttentionSeekBar:
+                        ApplicationWrapper.getSettingsProvider().writeThresholdValue(SettingsProvider.STRESS_ATTENTION_VALUE, Integer.valueOf(textView.getText().toString()));
+                        break;
+
+                    case R.id.stressAlertSeekBar:
+                        ApplicationWrapper.getSettingsProvider().writeThresholdValue(SettingsProvider.STRESS_ALERT_VALUE, Integer.valueOf(textView.getText().toString()));
+                        break;
+
+                    case R.id.stepAttentionSeekBar:
+                        ApplicationWrapper.getSettingsProvider().writeThresholdValue(SettingsProvider.STEP_ATTENTION_VALUE, Integer.valueOf(textView.getText().toString()));
+                        break;
+
+                    case R.id.stepNormSeekBar:
+                        ApplicationWrapper.getSettingsProvider().writeThresholdValue(SettingsProvider.STEP_NORMAL_VALUE, Integer.valueOf(textView.getText().toString()));
+                        break;
+
+                    case R.id.activityAttentionSeekBar:
+                        ApplicationWrapper.getSettingsProvider().writeThresholdValue(SettingsProvider.ACTIVITY_ATTENTION_VALUE, Integer.valueOf(textView.getText().toString()));
+                        break;
+
+                    case R.id.activityNormSeekBar:
+                        ApplicationWrapper.getSettingsProvider().writeThresholdValue(SettingsProvider.ACTIVITY_NORMAL_VALUE, Integer.valueOf(textView.getText().toString()));
+                        break;
+
+                    case R.id.timeStepSeekBar:
+                        ApplicationWrapper.getSettingsProvider().writeThresholdValue(SettingsProvider.TIME_STEP_VALUE, Integer.valueOf(textView.getText().toString()));
+                        break;
                 }
             }
         });
@@ -210,7 +289,71 @@ public class FragmentSettings extends Fragment
     {
         switch (checker.getId())
         {
+            case R.id.pulseAttentionSwitch:
+                ApplicationWrapper.getSettingsProvider().writeSwitcherState(SettingsProvider.PULSE_SWITCHER_STATE, isChecked);
+                break;
 
+            case R.id.pulseAlertSwitch:
+                ApplicationWrapper.getSettingsProvider().writeSwitcherState(SettingsProvider.PULSE_SWITCHER_STATE, isChecked);
+                break;
+
+            case R.id.stressAttentionSwitch:
+                ApplicationWrapper.getSettingsProvider().writeSwitcherState(SettingsProvider.STRESS_SWITCHER_STATE, isChecked);
+                break;
+
+            case R.id.stressAlertSwitch:
+                ApplicationWrapper.getSettingsProvider().writeSwitcherState(SettingsProvider.STRESS_SWITCHER_STATE, isChecked);
+                break;
+
+            case R.id.stepAttentionSwitch:
+                ApplicationWrapper.getSettingsProvider().writeSwitcherState(SettingsProvider.STEP_SWITCHER_STATE, isChecked);
+                break;
+
+            case R.id.stepNormSwitch:
+                ApplicationWrapper.getSettingsProvider().writeSwitcherState(SettingsProvider.STEP_SWITCHER_STATE, isChecked);
+                break;
+
+            case R.id.activityAttentionSwitch:
+                ApplicationWrapper.getSettingsProvider().writeSwitcherState(SettingsProvider.ACTIVITY_SWITCHER_STATE, isChecked);
+                break;
+
+            case R.id.activityNormSwitch:
+                ApplicationWrapper.getSettingsProvider().writeSwitcherState(SettingsProvider.ACTIVITY_SWITCHER_STATE, isChecked);
+                break;
+
+            case R.id.autoEventsSwitch:
+                ApplicationWrapper.getSettingsProvider().writeSwitcherState(SettingsProvider.AUTO_EVENTS_SWITCHER_STATE, isChecked);
+                break;
+        }
+    }
+
+    private void initSavedState(Switch switcher)
+    {
+        switch (switcher.getId())
+        {
+            case R.id.pulseAttentionSwitch:
+                switcher.setChecked(ApplicationWrapper.getSettingsProvider().getSwitcherState(SettingsProvider.PULSE_SWITCHER_STATE));
+                pulseAttentionSeekBar.setProgress(ApplicationWrapper.getSettingsProvider().getThresholdValue(SettingsProvider.PULSE_ATTENTION_VALUE));
+                pulseAlertSeekBar.setProgress(ApplicationWrapper.getSettingsProvider().getThresholdValue(SettingsProvider.PULSE_ALERT_VALUE));
+                break;
+
+            case R.id.stressAttentionSwitch:
+                switcher.setChecked(ApplicationWrapper.getSettingsProvider().getSwitcherState(SettingsProvider.STRESS_SWITCHER_STATE));
+                stressAttentionSeekBar.setProgress(ApplicationWrapper.getSettingsProvider().getThresholdValue(SettingsProvider.STRESS_ATTENTION_VALUE));
+                stressAlertSeekBar.setProgress(ApplicationWrapper.getSettingsProvider().getThresholdValue(SettingsProvider.STRESS_ALERT_VALUE));
+                break;
+
+            case R.id.stepAttentionSwitch:
+                switcher.setChecked(ApplicationWrapper.getSettingsProvider().getSwitcherState(SettingsProvider.STEP_SWITCHER_STATE));
+                stepAttentionSeekBar.setProgress(ApplicationWrapper.getSettingsProvider().getThresholdValue(SettingsProvider.STEP_ATTENTION_VALUE));
+                stepNormSeekBar.setProgress(ApplicationWrapper.getSettingsProvider().getThresholdValue(SettingsProvider.STEP_NORMAL_VALUE));
+                break;
+
+            case R.id.activityAttentionSwitch:
+                switcher.setChecked(ApplicationWrapper.getSettingsProvider().getSwitcherState(SettingsProvider.ACTIVITY_SWITCHER_STATE));
+                activityAttentionSeekBar.setProgress(ApplicationWrapper.getSettingsProvider().getThresholdValue(SettingsProvider.ACTIVITY_ATTENTION_VALUE));
+                activityNormSeekBar.setProgress(ApplicationWrapper.getSettingsProvider().getThresholdValue(SettingsProvider.ACTIVITY_NORMAL_VALUE));
+                break;
         }
     }
 

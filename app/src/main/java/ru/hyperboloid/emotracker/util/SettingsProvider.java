@@ -32,6 +32,7 @@ public class SettingsProvider
 
     public static final String TIME_STEP_VALUE = "time_step";
 
+    public static final String AUTO_EVENTS_SWITCHER_STATE = "auto_ew_sw_state";
     public static final String IS_SOUND_USED = "is_sound";
     public static final String IS_VIBRO_USED = "is_vibro";
 
@@ -77,7 +78,7 @@ public class SettingsProvider
 
     public boolean getSwitcherState(String source)
     {
-        return sPref.getBoolean(source, true);
+        return sPref.getBoolean(source, false);
     }
 
     public void writeTimeStep(int step)

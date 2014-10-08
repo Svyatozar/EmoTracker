@@ -37,6 +37,7 @@
                         android:id="@+id/pulseAttentionSwitch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:checked="true"
                         android:text="ВНИМАНИЕ"/>
 
                     <TextView
@@ -70,6 +71,7 @@
 
                     <Switch
                         android:id="@+id/pulseAlertSwitch"
+                        android:enabled="false"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="ТРЕВОГА     "/>
@@ -115,6 +117,7 @@
 
                     <Switch
                         android:id="@+id/stressAttentionSwitch"
+                        android:checked="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="ВНИМАНИЕ"/>
@@ -150,6 +153,7 @@
 
                     <Switch
                         android:id="@+id/stressAlertSwitch"
+                        android:enabled="false"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="ТРЕВОГА     "/>
@@ -193,6 +197,7 @@
 
                     <Switch
                         android:id="@+id/stepAttentionSwitch"
+                        android:checked="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="ВНИМАНИЕ"/>
@@ -228,6 +233,7 @@
 
                     <Switch
                         android:id="@+id/stepNormSwitch"
+                        android:enabled="false"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="НОРМА        "/>
@@ -272,6 +278,7 @@
 
                     <Switch
                         android:id="@+id/activityAttentionSwitch"
+                        android:checked="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="ВНИМАНИЕ"/>
@@ -307,6 +314,7 @@
 
                     <Switch
                         android:id="@+id/activityNormSwitch"
+                        android:enabled="false"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="НОРМА        "/>
