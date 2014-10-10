@@ -313,7 +313,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
             if (pulse > threshold)
             {
-                ApplicationWrapper.getNetworkUtil().addEvent(pulse, stress, activity, steps);
+                ApplicationWrapper.getNetworkUtil().addEvent("ИСТОЧНИК - ПУЛЬС\nПОРОГ-ВНИМАНИЕ", pulse, stress, activity, steps);
                 Event event = new Event(android.R.drawable.ic_dialog_info, "ИСТОЧНИК - ПУЛЬС\nПОРОГ-ВНИМАНИЕ", info, 1);
                 ApplicationWrapper.getDataBaseWrapper().writeEvent(event);
                 sendNotification("ИСТОЧНИК - ПУЛЬС\nПОРОГ-ВНИМАНИЕ");
@@ -325,7 +325,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
             if (pulse > threshold)
             {
-                ApplicationWrapper.getNetworkUtil().addEvent(pulse, stress, activity, steps);
+                ApplicationWrapper.getNetworkUtil().addEvent("ИСТОЧНИК - ПУЛЬС\nПОРОГ-ТРЕВОГА", pulse, stress, activity, steps);
                 Event event = new Event(android.R.drawable.ic_dialog_info, "ИСТОЧНИК - ПУЛЬС\nПОРОГ-ТРЕВОГА", info, 1);
                 ApplicationWrapper.getDataBaseWrapper().writeEvent(event);
                 sendNotification("ИСТОЧНИК - ПУЛЬС\nПОРОГ-ТРЕВОГА");
@@ -338,7 +338,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
             if (stress > threshold)
             {
-                ApplicationWrapper.getNetworkUtil().addEvent(pulse, stress, activity, steps);
+                ApplicationWrapper.getNetworkUtil().addEvent("ИСТОЧНИК - СТРЕСС\nПОРОГ-ВНИМАНИЕ", pulse, stress, activity, steps);
                 Event event = new Event(android.R.drawable.ic_dialog_info, "ИСТОЧНИК - СТРЕСС\nПОРОГ-ВНИМАНИЕ", info, 1);
                 ApplicationWrapper.getDataBaseWrapper().writeEvent(event);
                 sendNotification("ИСТОЧНИК - СТРЕСС\nПОРОГ-ВНИМАНИЕ");
@@ -350,7 +350,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
             if (stress > threshold)
             {
-                ApplicationWrapper.getNetworkUtil().addEvent(pulse, stress, activity, steps);
+                ApplicationWrapper.getNetworkUtil().addEvent("ИСТОЧНИК - СТРЕСС\nПОРОГ-ТРЕВОГА", pulse, stress, activity, steps);
                 Event event = new Event(android.R.drawable.ic_dialog_info, "ИСТОЧНИК - СТРЕСС\nПОРОГ-ТРЕВОГА", info, 1);
                 ApplicationWrapper.getDataBaseWrapper().writeEvent(event);
                 sendNotification("ИСТОЧНИК - СТРЕСС\nПОРОГ-ТРЕВОГА");
@@ -363,7 +363,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
             if (stress > threshold)
             {
-                ApplicationWrapper.getNetworkUtil().addEvent(pulse, stress, activity, steps);
+                ApplicationWrapper.getNetworkUtil().addEvent("ИСТОЧНИК - ШАГИ\nПОРОГ-ВНИМАНИЕ", pulse, stress, activity, steps);
                 Event event = new Event(android.R.drawable.ic_dialog_info, "ИСТОЧНИК - ШАГИ\nПОРОГ-ВНИМАНИЕ", info, 1);
                 ApplicationWrapper.getDataBaseWrapper().writeEvent(event);
                 sendNotification("ИСТОЧНИК - ШАГИ\nПОРОГ-ВНИМАНИЕ");
@@ -375,7 +375,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
             if (stress > threshold)
             {
-                ApplicationWrapper.getNetworkUtil().addEvent(pulse, stress, activity, steps);
+                ApplicationWrapper.getNetworkUtil().addEvent("ИСТОЧНИК - ШАГИ\nПОРОГ-НОРМА", pulse, stress, activity, steps);
                 Event event = new Event(android.R.drawable.ic_dialog_info, "ИСТОЧНИК - ШАГИ\nПОРОГ-НОРМА", info, 1);
                 ApplicationWrapper.getDataBaseWrapper().writeEvent(event);
                 sendNotification("ИСТОЧНИК - ШАГИ\nПОРОГ-НОРМА");
@@ -388,7 +388,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
             if (stress > threshold)
             {
-                ApplicationWrapper.getNetworkUtil().addEvent(pulse, stress, activity, steps);
+                ApplicationWrapper.getNetworkUtil().addEvent("ИСТОЧНИК - АКТИВНОСТЬ\nПОРОГ-ВНИМАНИЕ", pulse, stress, activity, steps);
                 Event event = new Event(android.R.drawable.ic_dialog_info, "ИСТОЧНИК - АКТИВНОСТЬ\nПОРОГ-ВНИМАНИЕ", info, 0);
                 ApplicationWrapper.getDataBaseWrapper().writeEvent(event);
                 sendNotification("ИСТОЧНИК - АКТИВНОСТЬ\nПОРОГ-ВНИМАНИЕ");
@@ -400,7 +400,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
             if (stress > threshold)
             {
-                ApplicationWrapper.getNetworkUtil().addEvent(pulse, stress, activity, steps);
+                ApplicationWrapper.getNetworkUtil().addEvent("ИСТОЧНИК - ШАГИ\nПОРОГ-НОРМА", pulse, stress, activity, steps);
                 Event event = new Event(android.R.drawable.ic_dialog_info, "ИСТОЧНИК - ШАГИ\nПОРОГ-НОРМА", info, 0);
                 ApplicationWrapper.getDataBaseWrapper().writeEvent(event);
                 sendNotification("ИСТОЧНИК - ШАГИ\nПОРОГ-НОРМА");

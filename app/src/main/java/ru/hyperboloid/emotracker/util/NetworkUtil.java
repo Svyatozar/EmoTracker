@@ -1,5 +1,6 @@
 package ru.hyperboloid.emotracker.util;
 
+import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -9,13 +10,35 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.BufferedHttpEntity;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import ru.hyperboloid.emotracker.ApplicationWrapper;
+import ru.hyperboloid.emotracker.R;
 import ru.hyperboloid.emotracker.interfaces.BooleanCallback;
 import ru.hyperboloid.emotracker.model.Event;
 
@@ -188,15 +211,15 @@ public class NetworkUtil
         // TODO
     }
 
-    public void addEvent(int pulse, int stress, int activity, int steps)
+    public void addEvent(String name, final int pulse, final int stress, final int activity, int steps)
     {
         Log.i("LOG", "ADD EVENT: " + pulse);
 
         Map<String, String>  params = new HashMap<String, String>();
         params.put("userId", ApplicationWrapper.getSettingsProvider().getLogin());
-        params.put("name", "TEST");
-        params.put("startDate", "2014-10-09");
-        params.put("endDate", "2014-10-09");
+        params.put("name", name);
+        params.put("startDate", formatDate(Calendar.getInstance().getTime()));
+        params.put("endDate", formatDate(Calendar.getInstance().getTime()));
         params.put("type_id", "0");
         params.put("isAuto", "true");
 
@@ -244,5 +267,73 @@ public class NetworkUtil
         };
 
         queue.add(registerRequest);
+
+//        new AsyncTask<Void, Void, Void>()
+//        {
+//            @Override
+//            protected Void doInBackground(Void... voids)
+//            {
+//
+//                HttpClient httpclient = new DefaultHttpClient();
+//                HttpPost httppost = new HttpPost(SERVER_NAME + CREATE_TOKEN);
+//
+//                try
+//                {
+//                    //httppost.setEntity(new StringEntity("{}"));
+//                    httppost.setHeader("Accept", "application/json");
+//                    httppost.setHeader("Content-Type", "application/json");
+//
+//                    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+//
+//                    Log.i("LOG", "TIME: " + Calendar.getInstance().getTime().toString());
+//
+//                    nameValuePairs.add(new BasicNameValuePair("userId", ApplicationWrapper.getSettingsProvider().getLogin()));
+//                    nameValuePairs.add(new BasicNameValuePair("name", "TEST"));
+//                    nameValuePairs.add(new BasicNameValuePair("startDate", Calendar.getInstance().getTime().toString()));
+//                    nameValuePairs.add(new BasicNameValuePair("endDate", Calendar.getInstance().getTime().toString()));
+//                    nameValuePairs.add(new BasicNameValuePair("type_id", "1"));
+//                    nameValuePairs.add(new BasicNameValuePair("isAuto", "true"));
+//                    nameValuePairs.add(new BasicNameValuePair("puls", String.valueOf(pulse)));
+//                    nameValuePairs.add(new BasicNameValuePair("stress", String.valueOf(stress)));
+//                    nameValuePairs.add(new BasicNameValuePair("activity", String.valueOf(activity)));
+//
+//                    httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+//
+//                    // Execute HTTP Post Request
+//                    HttpResponse response = httpclient.execute(httppost);
+//
+//                    HttpEntity res = new BufferedHttpEntity(response.getEntity());
+//
+//                    InputStream inputStream = res.getContent();
+//
+//                    BufferedReader r = new BufferedReader(new InputStreamReader(inputStream));
+//                    StringBuilder total = new StringBuilder();
+//                    String line;
+//                    while ((line = r.readLine()) != null)
+//                    {
+//                        total.append(line);
+//                    }
+//
+//                    Log.i("LOG", "ANSWER: " + total.toString());
+//                }
+//                catch (ClientProtocolException e)
+//                {
+//                    Log.e("LOG", "ERROR: " + e.getMessage());
+//                }
+//                catch (IOException e)
+//                {
+//                    Log.e("LOG", "ERROR: " + e.getMessage());
+//                }
+//
+//                return null;
+//            }
+//        }.execute();
+    }
+
+    public String formatDate(Date date)
+    {
+        SimpleDateFormat targetDateFormat = new SimpleDateFormat(ApplicationWrapper.getContext().getString(R.string.date_format), Locale.US);
+
+        return targetDateFormat.format(date);
     }
 }

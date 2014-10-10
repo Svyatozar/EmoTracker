@@ -10,8 +10,6 @@
     <string name="action_connect">Подключить устройство</string>
     <string name="action_settings">Settings</string>
 
-    <string name="hello_world">Hello world!</string>
-
     <string name="no_bluetooth_message">Bluetooth недоступен на устройстве</string>
 
     <string name="bluetooth_connecting_message">Подключаем устройство</string>
@@ -38,5 +36,7 @@
     <string name="stress_threshold">Пороги по стрессу:</string>
     <string name="step_threshold">Пороги по шагам:</string>
     <string name="activity_threshold">Пороги по активности:</string>
+
+    <string name="date_format">yyyy-MM-dd HH:mm:ss</string>
 
 </resources>
