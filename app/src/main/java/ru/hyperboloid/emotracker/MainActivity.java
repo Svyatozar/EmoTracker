@@ -217,12 +217,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
             incomingHandlers.clear();
             incomingHandlers.add(fragmentIndicators.getHandler());
-
-//            mTitle = getString(R.string.title_section2);
-
-//            getFragmentManager().beginTransaction()
-//                    .replace(R.id.container, fragmentIndicators)
-//                    .commit();
+            incomingHandlers.add(fragmentEvents.getHandler());
 
             Message msg = Message.obtain(null, BluetoothService.MESSAGE_REGISTER, 0, 0);
             msg.replyTo = clientMessenger;

@@ -29,6 +29,7 @@
     <string name="device_is_bad">Статус: устройство отключено</string>
     <string name="record">Запись события</string>
     <string name="start">Старт</string>
+    <string name="stop">Стоп</string>
     <string name="email">E-mail</string>
 
     <string name="preferences_filename">emo_preferences</string>

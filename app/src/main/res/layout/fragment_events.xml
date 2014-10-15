@@ -30,8 +30,8 @@
             android:paddingLeft="@dimen/activity_half_margin"
             android:text="@string/record"/>
 
-        <TextView
-            android:id="@+id/timeCounter"
+        <Chronometer
+            android:id="@+id/chronometer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/activity_half_margin"
