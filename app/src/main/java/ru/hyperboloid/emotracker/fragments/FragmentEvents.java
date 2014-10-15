@@ -25,6 +25,10 @@ public class FragmentEvents extends Fragment
     private Button startButton;
     private TextView timeCounter;
 
+    private TextView deviceState;
+
+    private boolean connectionStateFlag = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -40,7 +44,30 @@ public class FragmentEvents extends Fragment
         startButton = (Button)rootView.findViewById(R.id.startButton);
         timeCounter = (TextView)rootView.findViewById(R.id.timeCounter);
 
+        deviceState = (TextView)rootView.findViewById(R.id.deviceState);
+
+        setDeviceState(connectionStateFlag);
+
         return rootView;
+    }
+
+
+    /**
+     * Установить статус устройства
+     * @param state true - подключено, false - нет
+     */
+    public void setDeviceState(boolean state)
+    {
+        connectionStateFlag = state;
+
+        if (state)
+        {
+            deviceState.setText(getString(R.string.device_is_ok));
+        }
+        else
+        {
+            deviceState.setText(getString(R.string.device_is_bad));
+        }
     }
 
     @Override

@@ -64,11 +64,18 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
     private static boolean active = false;
 
+    private FragmentEvents fragmentEvents;
+    private FragmentIndicators fragmentIndicators;
+    private FragmentSettings fragmentSettings;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        fragmentIndicators = new FragmentIndicators();
+        fragmentSettings = new FragmentSettings();
 
         getInformationRepeater = new Handler(informationRepeatCallback);
 
@@ -105,26 +112,31 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
             case 0:
                 mTitle = getString(R.string.title_section1);
 
+                if (null == fragmentEvents)
+                    fragmentEvents = new FragmentEvents();
+
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, new FragmentEvents())
+                        .replace(R.id.container, fragmentEvents)
                         .commit();
                 break;
             case 1:
                 mTitle = getString(R.string.title_section2);
 
-                FragmentIndicators statusFragment = new FragmentIndicators();
-                statusFragment.setServiceMessenger(serviceMessenger);
-                incomingHandlers.clear();
-                incomingHandlers.add(statusFragment.getHandler());
+                if (null == fragmentIndicators)
+                    fragmentIndicators = new FragmentIndicators();
+
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, new FragmentIndicators())
+                        .replace(R.id.container, fragmentIndicators)
                         .commit();
                 break;
             case 2:
                 mTitle = getString(R.string.title_section3);
 
+                if (null == fragmentSettings)
+                    fragmentSettings = new FragmentSettings();
+
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, new FragmentSettings())
+                        .replace(R.id.container, fragmentSettings)
                         .commit();
                 break;
         }
@@ -199,15 +211,18 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
             Log.i("LOG", "Service connected");
             serviceMessenger = new Messenger(service);
 
-            FragmentIndicators statusFragment = new FragmentIndicators();
-            statusFragment.setServiceMessenger(serviceMessenger);
-            incomingHandlers.add(statusFragment.getHandler());
+            fragmentEvents.setDeviceState(true);
 
-            mTitle = getString(R.string.title_section2);
+            fragmentIndicators.setServiceMessenger(serviceMessenger);
 
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.container, statusFragment)
-                    .commit();
+            incomingHandlers.clear();
+            incomingHandlers.add(fragmentIndicators.getHandler());
+
+//            mTitle = getString(R.string.title_section2);
+
+//            getFragmentManager().beginTransaction()
+//                    .replace(R.id.container, fragmentIndicators)
+//                    .commit();
 
             Message msg = Message.obtain(null, BluetoothService.MESSAGE_REGISTER, 0, 0);
             msg.replyTo = clientMessenger;
@@ -218,7 +233,9 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         }
 
         @Override
-        public void onServiceDisconnected(ComponentName name) {
+        public void onServiceDisconnected(ComponentName name)
+        {
+            fragmentEvents.setDeviceState(true);
             serviceMessenger = null;
         }
     }

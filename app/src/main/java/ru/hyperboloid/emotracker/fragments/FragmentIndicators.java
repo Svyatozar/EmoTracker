@@ -52,6 +52,10 @@ public class FragmentIndicators extends Fragment
     XYPlot stressPlot;
     XYPlot activityPlot;
 
+    List<Number> arrayPulse = new ArrayList<Number>();
+    List<Number> arrayStress = new ArrayList<Number>();
+    List<Number> arrayActivity = new ArrayList<Number>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -71,6 +75,28 @@ public class FragmentIndicators extends Fragment
         stressPlot = (XYPlot) rootView.findViewById(R.id.stressPlot);
         activityPlot = (XYPlot) rootView.findViewById(R.id.activityPlot);
 
+        XYSeries seriesPulse = new SimpleXYSeries(arrayPulse, SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "");
+        XYSeries seriesStress = new SimpleXYSeries(arrayStress, SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "");
+        XYSeries seriesActivity = new SimpleXYSeries(arrayActivity, SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "");
+
+        pulsePlot.clear();
+        stressPlot.clear();
+        activityPlot.clear();
+
+        // same as above:
+        LineAndPointFormatter seriesFormat = new LineAndPointFormatter();
+        seriesFormat.setPointLabelFormatter(new PointLabelFormatter());
+        seriesFormat.configure(getActivity().getApplicationContext(),
+                R.xml.line_point_formatter_with_plf2);
+
+        pulsePlot.addSeries(seriesPulse, seriesFormat);
+        stressPlot.addSeries(seriesStress, seriesFormat);
+        activityPlot.addSeries(seriesActivity, seriesFormat);
+
+        pulsePlot.redraw();
+        stressPlot.redraw();
+        activityPlot.redraw();
+
         return rootView;
     }
 
@@ -84,10 +110,6 @@ public class FragmentIndicators extends Fragment
 
     public class StatusHandler extends Handler {
         int counter = 1;
-
-        List<Number> arrayPulse = new ArrayList<Number>();
-        List<Number> arrayStress = new ArrayList<Number>();
-        List<Number> arrayActivity = new ArrayList<Number>();
 
         @Override
         public void handleMessage(Message msg) {
