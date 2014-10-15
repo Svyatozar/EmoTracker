@@ -273,7 +273,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
             if (null != getInformationRepeater)
             {
-                getInformationRepeater.sendEmptyMessageDelayed(0, 10000);
+                getInformationRepeater.sendEmptyMessageDelayed(0, 5000);
             }
 
             return true;

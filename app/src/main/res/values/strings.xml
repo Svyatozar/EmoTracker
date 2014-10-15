@@ -25,7 +25,8 @@
     <string name="enter_gender">Пол</string>
     <string name="register">Регистрация</string>
     <string name="go">Далее</string>
-    <string name="device_is_ok">Устройство на руке</string>
+    <string name="device_is_ok">Статус: устройство на руке</string>
+    <string name="device_is_bad">Статус: устройство отключено</string>
     <string name="record">Запись события</string>
     <string name="start">Старт</string>
     <string name="email">E-mail</string>
@@ -38,5 +39,14 @@
     <string name="activity_threshold">Пороги по активности:</string>
 
     <string name="date_format">yyyy-MM-dd HH:mm:ss</string>
+    <string name="please_go_register">Пожалуйста пройдите регистрацию</string>
+
+    <string name="press_go">Регистрация пройдена успешно, нажмите Далее</string>
+
+    <string-array name="gender_array">
+        <item>Пол</item>
+        <item>Мужской</item>
+        <item>Женский</item>
+    </string-array>
 
 </resources>

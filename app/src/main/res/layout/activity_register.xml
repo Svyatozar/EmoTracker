@@ -26,9 +26,10 @@
                 android:gravity="center"/>
 
             <TextView
+                android:id="@+id/registerTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Пожалуйста пройдите регистрацию"
+                android:text="@string/please_go_register"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:padding="@dimen/activity_horizontal_margin"
@@ -69,6 +70,7 @@
                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:inputType="textEmailAddress"
 
                     android:hint="@string/email"
                     android:gravity="center"/>
@@ -84,18 +86,21 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:inputType="number"
 
                         android:hint="@string/enter_age"
                         android:gravity="center"/>
 
-                    <EditText
+                    <Spinner
                         android:id="@+id/gender"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
 
-                        android:hint="@string/enter_gender"
-                        android:gravity="center"/>
+                        android:prompt="@string/enter_gender"
+                        android:gravity="center">
+
+                    </Spinner>
 
                 </LinearLayout>
 

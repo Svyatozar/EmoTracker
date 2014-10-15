@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import ru.hyperboloid.emotracker.ApplicationWrapper;
 import ru.hyperboloid.emotracker.R;
@@ -20,6 +22,9 @@ public class FragmentEvents extends Fragment
     private ListView eventsList;
     private EventsAdapter eventsAdapter;
 
+    private Button startButton;
+    private TextView timeCounter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -31,6 +36,9 @@ public class FragmentEvents extends Fragment
         eventsAdapter.loadData(ApplicationWrapper.getDataBaseWrapper().readEvents());
 
         eventsList.setAdapter(eventsAdapter);
+
+        startButton = (Button)rootView.findViewById(R.id.startButton);
+        timeCounter = (TextView)rootView.findViewById(R.id.timeCounter);
 
         return rootView;
     }
