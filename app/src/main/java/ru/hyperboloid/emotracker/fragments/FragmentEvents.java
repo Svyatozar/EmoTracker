@@ -22,6 +22,8 @@ import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYSeries;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import ru.hyperboloid.emotracker.ApplicationWrapper;
@@ -45,6 +47,9 @@ public class FragmentEvents extends Fragment
     private TextView deviceState;
 
     private boolean connectionStateFlag = false;
+
+    private Date startDate;
+    private Date endDate;
 
     private List<int[]> eventData = new ArrayList<int[]>();
 
@@ -72,6 +77,7 @@ public class FragmentEvents extends Fragment
                 {
                     if (connectionStateFlag)
                     {
+                        startDate = Calendar.getInstance().getTime();
                         chronometer.setBase(SystemClock.elapsedRealtime());
                         chronometer.start();
                         startButton.setText(getString(R.string.stop));
@@ -83,8 +89,13 @@ public class FragmentEvents extends Fragment
                 }
                 else
                 {
+                    endDate = Calendar.getInstance().getTime();
                     chronometer.stop();
                     startButton.setText(getString(R.string.start));
+
+                    getFragmentManager().beginTransaction().addToBackStack(null)
+                            .replace(R.id.container, new FragmentUserEvent())
+                            .commit();
                 }
             }
         });

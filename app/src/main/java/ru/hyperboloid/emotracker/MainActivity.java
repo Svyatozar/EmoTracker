@@ -211,8 +211,6 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
             Log.i("LOG", "Service connected");
             serviceMessenger = new Messenger(service);
 
-            fragmentEvents.setDeviceState(true);
-
             fragmentIndicators.setServiceMessenger(serviceMessenger);
 
             incomingHandlers.clear();
@@ -248,11 +246,13 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
             {
                 case BluetoothService.MESSAGE_BLUETOOTH_CONNECTED:
                     connectionDialog.dismiss();
+                    fragmentEvents.setDeviceState(true);
                     Toast.makeText(MainActivity.this, "Bluetooth connection established", Toast.LENGTH_SHORT).show();
                     getInformationRepeater.sendEmptyMessageDelayed(0, 5000);
                     break;
                 case BluetoothService.MESSAGE_BLUETOOTH_CONNECT_FAILED:
                     connectionDialog.dismiss();
+                    fragmentEvents.setDeviceState(false);
                     Toast.makeText(MainActivity.this, "Bluetooth connection failed", Toast.LENGTH_SHORT).show();
                     break;
                 default:

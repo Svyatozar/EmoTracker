@@ -43,6 +43,9 @@
     <string name="please_go_register">Пожалуйста пройдите регистрацию</string>
 
     <string name="press_go">Регистрация пройдена успешно, нажмите Далее</string>
+    <string name="user_event">Событие пользователя</string>
+    <string name="event_name">Название события</string>
+    <string name="comment">Комментарий</string>
 
     <string-array name="gender_array">
         <item>Пол</item>
