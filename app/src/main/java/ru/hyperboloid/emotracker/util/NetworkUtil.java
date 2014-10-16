@@ -48,6 +48,7 @@ public class NetworkUtil
 
     private static final String CREATE_TOKEN = "tokens/create";
     private static final String CREATE_USER = "users";
+    private static final String LOG_IN = "users/login";
     private static final String CREATE_EVENT = "data/saveDataEvent ";
 
     private RequestQueue queue;
@@ -184,10 +185,99 @@ public class NetworkUtil
 
                         if(volleyError.networkResponse != null && volleyError.networkResponse.data != null)
                         {
-                            Log.d("LOG", "Error.Response " + new String(volleyError.networkResponse.data));
+                            String errorText = new String(volleyError.networkResponse.data);
+                            Log.d("LOG", "Error.Response " + errorText);
+
+                            if (errorText.contains("Email already exist"))
+                            {
+                                Toast.makeText(ApplicationWrapper.getContext(), "Ошибка при создании пользователя! Такой email уже существует", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                                if (errorText.contains("Name already exist"))
+                                {
+                                    logIn(login, callback);
+                                }
+                                else
+                                    callback.onCallback(false);
+                        }
+                        else
+                        {
+                            callback.onCallback(false);
                         }
 
-                        Toast.makeText(ApplicationWrapper.getContext(), "Ошибка при создании пользователя! Проверьте, все ли поля заполнены верно.", Toast.LENGTH_SHORT).show();
+                        // Duplicate User. Email already exist
+                        // Duplicate User. Name already exist
+                    }
+                }
+        )
+        {
+            @Override
+            public Map<String, String> getHeaders()
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Accept", "application/json");
+                params.put("Content-Type", "application/json");
+
+                return params;
+            }
+        };
+
+        queue.add(registerRequest);
+    }
+
+    private void logIn(final String userName, final BooleanCallback callback)
+    {
+        Map<String, String>  params = new HashMap<String, String>();
+        params.put("userName", userName);
+        params.put("password", "00000");
+
+        JSONObject data = new JSONObject(params);
+
+        Log.i("LOG", data.toString());
+
+        JsonObjectRequest registerRequest = new JsonObjectRequest(Request.Method.POST, SERVER_NAME + LOG_IN, data,
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response)
+                    {
+                        Log.d("LOG", "Response FOR LOGIN" + response.toString());
+
+                        String loginId = null;
+
+                        try
+                        {
+                            JSONObject object = response.getJSONObject("result");
+                            loginId = object.getString("id");
+                            Log.d("LOG", "LOGIN ID =  " + loginId);
+                        }
+                        catch (JSONException e)
+                        {
+                            Log.e("LOG", e.getMessage().toString());
+                        }
+
+                        if (null != loginId)
+                        {
+                            ApplicationWrapper.getSettingsProvider().writeLogin(loginId);
+                            Toast.makeText(ApplicationWrapper.getContext(), "Логин уже зарегистрирован, вы авторизованы.", Toast.LENGTH_SHORT).show();
+                            callback.onCallback(true);
+                        }
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError)
+                    {
+                        Log.d("LOG", "Error.Response" + volleyError.toString());
+
+                        if(volleyError.networkResponse != null && volleyError.networkResponse.data != null)
+                        {
+                            String errorText = new String(volleyError.networkResponse.data);
+                            Log.d("LOG", "Error.Response " + errorText);
+
+                            callback.onCallback(false);
+                        }
                     }
                 }
         )

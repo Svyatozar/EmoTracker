@@ -55,10 +55,17 @@ public class RegisterActivity extends Activity
                 @Override
                 public void onCallback(boolean isSuccess)
                 {
-                    registerTitle.setText(getString(R.string.press_go));
+                    if (isSuccess)
+                    {
+                        registerTitle.setText(getString(R.string.press_go));
 
-                    goButton.setEnabled(true);
-                    register.setEnabled(false);
+                        goButton.setEnabled(true);
+                        register.setEnabled(false);
+                    }
+                    else
+                    {
+
+                    }
                 }
             };
 
