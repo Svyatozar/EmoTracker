@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.inputmethodservice.ExtractEditText;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,15 +12,19 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Gallery;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import ru.hyperboloid.emotracker.ApplicationWrapper;
 import ru.hyperboloid.emotracker.R;
+import ru.hyperboloid.emotracker.model.Event;
 
 /**
  * Фрагмент для настройки и отображения событий
@@ -31,20 +36,31 @@ public class FragmentUserEvent extends Fragment
 
     private View tempView;
 
+    private ExtractEditText comment;
+    private EditText eventName;
+    private TextView eventLength;
+
     private Date startDate;
     private Date endDate;
 
+    /**
+     * 0 - пульс 1 - стресс 2 - активность
+     */
     private List<int[]> eventData;
+
+    private int selectedImage = -1;
+    private String length;
 
     private final Integer[] mImage = { R.drawable.airport, R.drawable.birthday_cake,
             R.drawable.cafe, R.drawable.fires, R.drawable.fog_day, R.drawable.humburger,
             R.drawable.like, R.drawable.music, R.drawable.no_food, R.drawable.tattoo };
 
-    public void initData(Date startDate, Date endDate, List<int[]> eventData)
+    public void initData(Date startDate, Date endDate, List<int[]> eventData, String length)
     {
         this.startDate = startDate;
         this.endDate = endDate;
         this.eventData = eventData;
+        this.length = length;
     }
 
     @Override
@@ -54,6 +70,11 @@ public class FragmentUserEvent extends Fragment
 
         okButton = (Button)rootView.findViewById(R.id.okButton);
         gallery = (Gallery)rootView.findViewById(R.id.gallery);
+
+        comment = (ExtractEditText)rootView.findViewById(R.id.comment);
+        eventName = (EditText)rootView.findViewById(R.id.eventName);
+        eventLength = (TextView)rootView.findViewById(R.id.eventLength);
+        eventLength.setText("Продолжительность " + length);
 
         gallery.setAdapter(new ImageAdapter(getActivity().getApplicationContext()));
 
@@ -71,9 +92,7 @@ public class FragmentUserEvent extends Fragment
                 }
                 v.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.main_background)));
 
-                // Выводим номер позиции при щелчке на картинке из галереи
-                Toast.makeText(getActivity(),
-                        "Позиция: " + position, Toast.LENGTH_SHORT).show();
+                selectedImage = position;
 
                 tempView = v;
             }
@@ -84,7 +103,37 @@ public class FragmentUserEvent extends Fragment
             @Override
             public void onClick(View view)
             {
-                getActivity().onBackPressed();
+                if ((-1 != selectedImage) && (comment.length() > 1) && (eventName.length() > 1))
+                {
+                    int pulse = 0;
+                    int stress = 0;
+                    int activity = 0;
+
+                    for (int[] event : eventData)
+                    {
+                        pulse+=event[0];
+                        stress+=event[1];
+                        activity+=event[2];
+                    }
+
+                    pulse = pulse / eventData.size();
+                    stress = stress / eventData.size();
+                    activity = activity / eventData.size();
+
+                    String info = "Пульс: " + pulse + " Стресс: " + stress + " Активность: " + activity;
+
+                    Event event = new Event(android.R.drawable.ic_dialog_info, eventName.getText().toString()
+                            + "\n" + eventLength.getText().toString(), info, 1);
+                    ApplicationWrapper.getDataBaseWrapper().writeEvent(event);
+
+
+
+                    getActivity().onBackPressed();
+                }
+                else
+                {
+                    Toast.makeText(getActivity(), "Заполните все поля", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

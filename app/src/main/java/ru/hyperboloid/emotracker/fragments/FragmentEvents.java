@@ -51,7 +51,12 @@ public class FragmentEvents extends Fragment
     private Date startDate;
     private Date endDate;
 
+    /**
+     * 0 - пульс 1 - стресс 2 - активность
+     */
     private List<int[]> eventData = new ArrayList<int[]>();
+
+    private boolean isRecordStarted = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -77,10 +82,16 @@ public class FragmentEvents extends Fragment
                 {
                     if (connectionStateFlag)
                     {
+                        startDate = null;
+                        endDate = null;
+                        eventData.clear();
+
                         startDate = Calendar.getInstance().getTime();
                         chronometer.setBase(SystemClock.elapsedRealtime());
                         chronometer.start();
                         startButton.setText(getString(R.string.stop));
+
+                        isRecordStarted = true;
                     }
                     else
                     {
@@ -89,12 +100,17 @@ public class FragmentEvents extends Fragment
                 }
                 else
                 {
+                    isRecordStarted = false;
+
                     endDate = Calendar.getInstance().getTime();
                     chronometer.stop();
                     startButton.setText(getString(R.string.start));
 
+                    FragmentUserEvent fragmentUserEvent = new FragmentUserEvent();
+                    fragmentUserEvent.initData(startDate, endDate, eventData, chronometer.getFormat());
+
                     getFragmentManager().beginTransaction().addToBackStack(null)
-                            .replace(R.id.container, new FragmentUserEvent())
+                            .replace(R.id.container, fragmentUserEvent)
                             .commit();
                 }
             }
@@ -124,7 +140,10 @@ public class FragmentEvents extends Fragment
                         DeviceInfo deviceInfo = (DeviceInfo) msg.getData().getSerializable(BluetoothService.RESPONSE_DATA);
                         if (deviceInfo != null)
                         {
-                            eventData.add(new int[]{deviceInfo.chss, deviceInfo.stressInd, deviceInfo.aktivnost});
+                            if (isRecordStarted)
+                            {
+                                eventData.add(new int[]{deviceInfo.chss, deviceInfo.stressInd, deviceInfo.aktivnost});
+                            }
                         }
                         break;
                     default:

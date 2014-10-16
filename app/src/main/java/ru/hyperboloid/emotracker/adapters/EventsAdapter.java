@@ -1,6 +1,7 @@
 package ru.hyperboloid.emotracker.adapters;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,6 +72,15 @@ public class EventsAdapter extends BaseAdapter
             result = convertView;
         else
             result = inflater.inflate(R.layout.item_event, parentViewGroup,false);
+
+        if (position == 0)
+        {
+            result.setBackgroundDrawable(new ColorDrawable(ApplicationWrapper.getContext().getResources().getColor(R.color.second_background)));
+        }
+        else
+        {
+            result.setBackgroundDrawable(new ColorDrawable(ApplicationWrapper.getContext().getResources().getColor(R.color.main_background)));
+        }
 
         Event event = events.get(position);
 

@@ -27,6 +27,7 @@
             android:layout_marginBottom="@dimen/activity_horizontal_margin"/>
 
         <EditText
+            android:id="@+id/eventName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/event_name"/>
@@ -39,10 +40,10 @@
         </Gallery>
 
         <android.inputmethodservice.ExtractEditText
+            android:id="@+id/comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/comment"
-            android:id="@+id/extractEditText"/>
+            android:hint="@string/comment"/>
 
 
     </LinearLayout>
