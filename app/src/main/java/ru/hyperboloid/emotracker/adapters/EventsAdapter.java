@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import ru.hyperboloid.emotracker.ApplicationWrapper;
@@ -41,6 +42,8 @@ public class EventsAdapter extends BaseAdapter
     {
         this.events.clear();
         this.events.addAll(events);
+
+        Collections.reverse(this.events);
 
         notifyDataSetChanged();
     }

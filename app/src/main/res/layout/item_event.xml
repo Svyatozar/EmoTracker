@@ -16,6 +16,7 @@
 
     <TextView
         android:id="@+id/details"
+        android:textColor="@android:color/black"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -27,6 +28,7 @@
 
     <TextView
         android:id="@+id/info"
+        android:textColor="@android:color/black"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"

@@ -11,6 +11,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -424,11 +425,24 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
     {
         if (!active)
         {
+
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(this)
                             .setSmallIcon(android.R.drawable.ic_menu_recent_history)
                             .setContentTitle("EmoTracker")
                             .setContentText(message);
+
+            if (ApplicationWrapper.getSettingsProvider().getSwitcherState(SettingsProvider.IS_VIBRO_USED))
+            {
+                mBuilder.setVibrate(new long[]{500,500});
+            }
+
+            if (ApplicationWrapper.getSettingsProvider().getSwitcherState(SettingsProvider.IS_SOUND_USED))
+            {
+                mBuilder.setSound(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.personaljams));
+            }
+
+            ApplicationWrapper.getSettingsProvider();
 
             Intent resultIntent = new Intent(this, MainActivity.class);
 

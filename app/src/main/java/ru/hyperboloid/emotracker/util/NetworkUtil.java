@@ -359,16 +359,9 @@ public class NetworkUtil
         queue.add(registerRequest);
     }
 
-    public void addEvent(String name, Date startDate, Date endDate, List<int[]> eventData, final int pulse, final int stress, final int activity)
+    public void addEvent(String name, String description, Date startDate, Date endDate, List<int[]> eventData, final int pulse, final int stress, final int activity)
     {
-        Log.i("LOG", "ADD EVENT: " + name);
-
-        Map<String, String>  jsonEventData = new HashMap<String, String>();
-        jsonEventData.put("userId", ApplicationWrapper.getSettingsProvider().getLogin());
-        jsonEventData.put("name", name);
-        jsonEventData.put("startDate", formatDate(startDate));
-
-
+        Log.i("LOG", "ADD EVENT: " + name + " " + pulse + " " + stress + " " + activity);
 
         Map<String, String>  params = new HashMap<String, String>();
         params.put("userId", ApplicationWrapper.getSettingsProvider().getLogin());
@@ -377,6 +370,7 @@ public class NetworkUtil
         params.put("endDate", formatDate(endDate));
         params.put("type_id", "0");
         params.put("isAuto", "false");
+        params.put("description", description);
 
         params.put("puls", String.valueOf(pulse));
         params.put("stress", String.valueOf(stress));

@@ -106,12 +106,19 @@ public class FragmentEvents extends Fragment
                     chronometer.stop();
                     startButton.setText(getString(R.string.start));
 
-                    FragmentUserEvent fragmentUserEvent = new FragmentUserEvent();
-                    fragmentUserEvent.initData(startDate, endDate, eventData, chronometer.getFormat());
+                    if (eventData.size() > 0)
+                    {
+                        FragmentUserEvent fragmentUserEvent = new FragmentUserEvent();
+                        fragmentUserEvent.initData(startDate, endDate, eventData, chronometer.getText().toString());
 
-                    getFragmentManager().beginTransaction().addToBackStack(null)
-                            .replace(R.id.container, fragmentUserEvent)
-                            .commit();
+                        getFragmentManager().beginTransaction().addToBackStack(null)
+                                .replace(R.id.container, fragmentUserEvent)
+                                .commit();
+                    }
+                    else
+                    {
+                        Toast.makeText(getActivity(), "Вы не успели записать событие!", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -165,13 +172,20 @@ public class FragmentEvents extends Fragment
     {
         connectionStateFlag = state;
 
-        if (state)
+        try
         {
-            deviceState.setText(getString(R.string.device_is_ok));
+            if (state)
+            {
+                deviceState.setText(getString(R.string.device_is_ok));
+            }
+            else
+            {
+                deviceState.setText(getString(R.string.device_is_bad));
+            }
         }
-        else
+        catch (IllegalStateException e)
         {
-            deviceState.setText(getString(R.string.device_is_bad));
+            Log.e("LOG", "ILLEGAL STATE FRAGMENT EVENTS");
         }
     }
 

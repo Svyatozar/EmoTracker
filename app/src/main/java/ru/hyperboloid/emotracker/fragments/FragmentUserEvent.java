@@ -18,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class FragmentUserEvent extends Fragment
 
     private View tempView;
 
-    private ExtractEditText comment;
+    private EditText comment;
     private EditText eventName;
     private TextView eventLength;
 
@@ -71,10 +70,10 @@ public class FragmentUserEvent extends Fragment
         okButton = (Button)rootView.findViewById(R.id.okButton);
         gallery = (Gallery)rootView.findViewById(R.id.gallery);
 
-        comment = (ExtractEditText)rootView.findViewById(R.id.comment);
+        comment = (EditText)rootView.findViewById(R.id.comment);
         eventName = (EditText)rootView.findViewById(R.id.eventName);
         eventLength = (TextView)rootView.findViewById(R.id.eventLength);
-        eventLength.setText("Продолжительность " + length);
+        eventLength.setText("Продолжительность: " + length);
 
         gallery.setAdapter(new ImageAdapter(getActivity().getApplicationContext()));
 
@@ -122,11 +121,18 @@ public class FragmentUserEvent extends Fragment
 
                     String info = "Пульс: " + pulse + " Стресс: " + stress + " Активность: " + activity;
 
-                    Event event = new Event(android.R.drawable.ic_dialog_info, eventName.getText().toString()
-                            + "\n" + eventLength.getText().toString(), info, 1);
+                    Event event = new Event(mImage[selectedImage], eventName.getText().toString().toUpperCase()
+                            + "\n" + "Продолжи-\nтельность: " + length, info, 1);
                     ApplicationWrapper.getDataBaseWrapper().writeEvent(event);
 
-
+                    ApplicationWrapper.getNetworkUtil().addEvent(eventName.getText().toString(),
+                                                                 comment.getText().toString(),
+                                                                 startDate,
+                                                                 endDate,
+                                                                 eventData,
+                                                                 pulse,
+                                                                 stress,
+                                                                 activity);
 
                     getActivity().onBackPressed();
                 }
