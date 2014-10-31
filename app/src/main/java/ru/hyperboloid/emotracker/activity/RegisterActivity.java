@@ -13,6 +13,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
+import com.splunk.mint.Mint;
+
 import ru.hyperboloid.emotracker.ApplicationWrapper;
 import ru.hyperboloid.emotracker.MainActivity;
 import ru.hyperboloid.emotracker.R;
@@ -35,6 +38,8 @@ public class RegisterActivity extends Activity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        //Crashlytics.start(this);
+        Mint.initAndStartSession(RegisterActivity.this, "9ac28b61");
         setContentView(R.layout.activity_register);
 
         login = (TextView)findViewById(R.id.login);

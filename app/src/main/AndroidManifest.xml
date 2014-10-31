@@ -15,7 +15,6 @@
         android:theme="@style/AppTheme"
         android:name=".ApplicationWrapper">
         <activity
-            android:configChanges="locale"
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
@@ -32,6 +31,7 @@
         </activity>
 
         <service android:name=".service.BluetoothService"/>
+        <meta-data android:name="com.crashlytics.ApiKey" android:value="c3e14c7898f4d5d6583cb834c0a82d45842fafc1"/>
 
     </application>
 

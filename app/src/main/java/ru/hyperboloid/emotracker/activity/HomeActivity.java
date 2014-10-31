@@ -16,6 +16,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
+
 import ru.hyperboloid.emotracker.R;
 //import ru.hyperboloid.emotracker.StatusFragment;
 import ru.hyperboloid.emotracker.service.BluetoothService;

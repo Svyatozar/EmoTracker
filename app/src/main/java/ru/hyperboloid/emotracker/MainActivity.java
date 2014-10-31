@@ -25,6 +25,8 @@ import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

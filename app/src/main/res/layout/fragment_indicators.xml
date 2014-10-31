@@ -38,7 +38,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             androidPlot.legendWidget.positionMetrics.anchor="right_bottom"
-            androidPlot.graphWidget.gridLinePaint.color="#000000"/>
+            androidPlot.graphWidget.backgroundPaint.color="@color/main_background"
+            androidPlot.graphWidget.gridBackgroundPaint.color="@color/main_background"
+            androidPlot.backgroundPaint.color="@color/main_background"
+            androidPlot.borderPaint.color="@color/main_background"/>
 
     </LinearLayout>
 
@@ -73,11 +76,11 @@
             android:id="@+id/stressPlot"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            androidPlot.legendWidget.iconSizeMetrics.heightMetric.value="15dp"
-            androidPlot.legendWidget.iconSizeMetrics.widthMetric.value="15dp"
-            androidPlot.legendWidget.heightMetric.value="25dp"
             androidPlot.legendWidget.positionMetrics.anchor="right_bottom"
-            androidPlot.graphWidget.gridLinePaint.color="#000000"/>
+            androidPlot.graphWidget.backgroundPaint.color="@color/main_background"
+            androidPlot.graphWidget.gridBackgroundPaint.color="@color/main_background"
+            androidPlot.backgroundPaint.color="@color/main_background"
+            androidPlot.borderPaint.color="@color/main_background"/>
 
     </LinearLayout>
 
@@ -127,11 +130,11 @@
             android:id="@+id/activityPlot"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            androidPlot.legendWidget.iconSizeMetrics.heightMetric.value="15dp"
-            androidPlot.legendWidget.iconSizeMetrics.widthMetric.value="15dp"
-            androidPlot.legendWidget.heightMetric.value="25dp"
             androidPlot.legendWidget.positionMetrics.anchor="right_bottom"
-            androidPlot.graphWidget.gridLinePaint.color="#000000"/>
+            androidPlot.graphWidget.backgroundPaint.color="@color/main_background"
+            androidPlot.graphWidget.gridBackgroundPaint.color="@color/main_background"
+            androidPlot.backgroundPaint.color="@color/main_background"
+            androidPlot.borderPaint.color="@color/main_background"/>
 
     </LinearLayout>
 
