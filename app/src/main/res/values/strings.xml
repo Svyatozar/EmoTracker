@@ -46,6 +46,8 @@
     <string name="user_event">Событие пользователя</string>
     <string name="event_name">Название события</string>
     <string name="comment">Комментарий</string>
+    <string name="off">OFF</string>
+    <string name="on">ON</string>
 
     <string-array name="gender_array">
         <item>Пол</item>

@@ -38,7 +38,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        android:text="ВНИМАНИЕ"/>
+                        android:text="ВНИМАНИЕ"
+                        android:textOff="@string/off"
+                        android:textOn="@string/on"/>
 
                     <TextView
                         android:id="@+id/pulseAttentionText"
@@ -74,7 +76,9 @@
                         android:enabled="false"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ТРЕВОГА     "/>
+                        android:text="ТРЕВОГА     "
+                        android:textOff="@string/off"
+                        android:textOn="@string/on"/>
 
                     <TextView
                         android:id="@+id/pulseAlertText"
@@ -120,7 +124,9 @@
                         android:checked="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ВНИМАНИЕ"/>
+                        android:text="ВНИМАНИЕ"
+                        android:textOff="@string/off"
+                        android:textOn="@string/on"/>
 
                     <TextView
                         android:id="@+id/stressAttentionText"
@@ -156,7 +162,9 @@
                         android:enabled="false"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ТРЕВОГА     "/>
+                        android:text="ТРЕВОГА     "
+                        android:textOff="@string/off"
+                        android:textOn="@string/on"/>
 
                     <TextView
                         android:id="@+id/stressAlertText"
@@ -200,7 +208,9 @@
                         android:checked="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ВНИМАНИЕ"/>
+                        android:text="ВНИМАНИЕ"
+                        android:textOff="@string/off"
+                        android:textOn="@string/on"/>
 
                     <TextView
                         android:id="@+id/stepAttentionText"
@@ -236,7 +246,9 @@
                         android:enabled="false"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="НОРМА        "/>
+                        android:text="НОРМА        "
+                        android:textOff="@string/off"
+                        android:textOn="@string/on"/>
 
                     <TextView
                         android:id="@+id/stepNormText"
@@ -281,7 +293,9 @@
                         android:checked="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ВНИМАНИЕ"/>
+                        android:text="ВНИМАНИЕ"
+                        android:textOff="@string/off"
+                        android:textOn="@string/on"/>
 
                     <TextView
                         android:id="@+id/activityAttentionText"
@@ -317,7 +331,9 @@
                         android:enabled="false"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="НОРМА        "/>
+                        android:text="НОРМА        "
+                        android:textOff="@string/off"
+                        android:textOn="@string/on"/>
 
                     <TextView
                         android:id="@+id/activityNormText"
@@ -390,7 +406,9 @@
                     android:id="@+id/autoEventsSwitch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="АВТОМА-\nТИЧЕСКИЕ\nСОБЫТИЯ"/>
+                    android:text="АВТОМА-\nТИЧЕСКИЕ\nСОБЫТИЯ"
+                    android:textOff="@string/off"
+                    android:textOn="@string/on"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
