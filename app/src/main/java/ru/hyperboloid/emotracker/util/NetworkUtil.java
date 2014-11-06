@@ -21,6 +21,7 @@ import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -361,6 +362,25 @@ public class NetworkUtil
         Log.i("LOG", "ADD EVENT: " + name + " " + pulse + " " + stress + " " + activity);
 
         Map<String, String>  params = new HashMap<String, String>();
+
+        try
+        {
+            JSONObject dataObject = new JSONObject();
+
+            for (int[] data : eventData)
+            {
+                dataObject.put("pulseMs",data[0]);
+                dataObject.put("accX",data[1]);
+                dataObject.put("accY",data[2]);
+            }
+
+            params.put("data", dataObject.toString());
+        }
+        catch (JSONException e)
+        {
+            Log.e("LOG", "CANNOT PUT EVENT DATA TO JSON");
+        }
+
         params.put("userId", ApplicationWrapper.getSettingsProvider().getLogin());
         params.put("name", name);
         params.put("startDate", formatDate(startDate));

@@ -33,16 +33,18 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
-        <com.androidplot.xy.XYPlot
-            android:id="@+id/pulsePlot"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            androidPlot.legendWidget.positionMetrics.anchor="right_bottom"
-            androidPlot.graphWidget.backgroundPaint.color="@color/main_background"
-            androidPlot.graphWidget.gridBackgroundPaint.color="@color/main_background"
-            androidPlot.backgroundPaint.color="@color/main_background"
-            androidPlot.borderPaint.color="@color/main_background"/>
+        <RelativeLayout
+            android:id="@+id/pulseSplash"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/main_background">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="НЕТ ДАННЫХ"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -72,15 +74,18 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
-        <com.androidplot.xy.XYPlot
-            android:id="@+id/stressPlot"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            androidPlot.legendWidget.positionMetrics.anchor="right_bottom"
-            androidPlot.graphWidget.backgroundPaint.color="@color/main_background"
-            androidPlot.graphWidget.gridBackgroundPaint.color="@color/main_background"
-            androidPlot.backgroundPaint.color="@color/main_background"
-            androidPlot.borderPaint.color="@color/main_background"/>
+        <RelativeLayout
+            android:id="@+id/stressSplash"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/main_background">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="НЕТ ДАННЫХ"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
 
     </LinearLayout>
 
@@ -126,15 +131,18 @@
                 android:layout_alignParentRight="true"/>
         </RelativeLayout>
 
-        <com.androidplot.xy.XYPlot
-            android:id="@+id/activityPlot"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            androidPlot.legendWidget.positionMetrics.anchor="right_bottom"
-            androidPlot.graphWidget.backgroundPaint.color="@color/main_background"
-            androidPlot.graphWidget.gridBackgroundPaint.color="@color/main_background"
-            androidPlot.backgroundPaint.color="@color/main_background"
-            androidPlot.borderPaint.color="@color/main_background"/>
+        <RelativeLayout
+            android:id="@+id/activitySplash"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/main_background">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="НЕТ ДАННЫХ"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
 
     </LinearLayout>
 
