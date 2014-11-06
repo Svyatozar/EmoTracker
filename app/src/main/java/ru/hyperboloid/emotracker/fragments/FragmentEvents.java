@@ -147,6 +147,8 @@ public class FragmentEvents extends Fragment
                         DeviceInfo deviceInfo = (DeviceInfo) msg.getData().getSerializable(BluetoothService.RESPONSE_DATA);
                         if (deviceInfo != null)
                         {
+                            eventsAdapter.loadData(ApplicationWrapper.getDataBaseWrapper().readEvents());
+
                             if (isRecordStarted)
                             {
                                 eventData.add(new int[]{deviceInfo.chss, deviceInfo.stressInd, deviceInfo.aktivnost});

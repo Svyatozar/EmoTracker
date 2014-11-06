@@ -20,17 +20,11 @@ import android.widget.TextView;
 import com.androidplot.Plot;
 import com.androidplot.xy.BoundaryMode;
 import com.androidplot.xy.LineAndPointFormatter;
-import com.androidplot.xy.PointLabelFormatter;
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
-import com.androidplot.xy.XYSeries;
-
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import ru.hyperboloid.emotracker.MainActivity;
 import ru.hyperboloid.emotracker.R;
 import ru.hyperboloid.emotracker.model.DeviceInfo;
 import ru.hyperboloid.emotracker.service.BluetoothService;
@@ -70,6 +64,20 @@ public class FragmentIndicators extends Fragment implements View.OnTouchListener
     List<Number> arrayActivity = new ArrayList<Number>();
 
     @Override
+    public void onCreate(Bundle bundle)
+    {
+        super.onCreate(bundle);
+
+        seriesPulse = new SimpleXYSeries(arrayPulse, SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "");
+        seriesStress = new SimpleXYSeries(arrayStress, SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "");
+        seriesActivity = new SimpleXYSeries(arrayActivity, SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "");
+
+        seriesPulse.addFirst(null, 0);
+        seriesStress.addFirst(null, 0);
+        seriesActivity.addFirst(null, 0);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View rootView = inflater.inflate(R.layout.fragment_indicators, container, false);
@@ -88,23 +96,19 @@ public class FragmentIndicators extends Fragment implements View.OnTouchListener
         stressPlot = (XYPlot) rootView.findViewById(R.id.stressPlot);
         activityPlot = (XYPlot) rootView.findViewById(R.id.activityPlot);
 
-//        pulsePlot.setBorderStyle(Plot.BorderStyle.NONE, null, null);
-//        stressPlot.setBorderStyle(Plot.BorderStyle.NONE, null, null);
-//        activityPlot.setBorderStyle(Plot.BorderStyle.NONE, null, null);
+        pulsePlot.setBorderStyle(Plot.BorderStyle.NONE, null, null);
+        stressPlot.setBorderStyle(Plot.BorderStyle.NONE, null, null);
+        activityPlot.setBorderStyle(Plot.BorderStyle.NONE, null, null);
 
-//        pulsePlot.setOnTouchListener(this);
-//        stressPlot.setOnTouchListener(this);
-//        activityPlot.setOnTouchListener(this);
+        pulsePlot.setOnTouchListener(this);
+        stressPlot.setOnTouchListener(this);
+        activityPlot.setOnTouchListener(this);
 
         pulsePlot.calculateMinMaxVals();
         minXY = new PointF(pulsePlot.getCalculatedMinX().floatValue(),
                 pulsePlot.getCalculatedMinY().floatValue());
         maxXY = new PointF(pulsePlot.getCalculatedMaxX().floatValue(),
                 pulsePlot.getCalculatedMaxY().floatValue());
-
-        seriesPulse = new SimpleXYSeries(arrayPulse, SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "");
-        seriesStress = new SimpleXYSeries(arrayStress, SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "");
-        seriesActivity = new SimpleXYSeries(arrayActivity, SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "");
 
         pulsePlot.clear();
         stressPlot.clear();
@@ -114,15 +118,15 @@ public class FragmentIndicators extends Fragment implements View.OnTouchListener
         stressPlot.getGraphWidget().setRangeTick(false);
         activityPlot.getGraphWidget().setRangeTick(false);
 
-        seriesPulse.addLast(null, 0);
-        seriesStress.addLast(null, 0);
-        seriesActivity.addLast(null, 0);
+        if (0 == seriesPulse.size())
+        {
+            seriesPulse.addLast(null, 0);
+            seriesStress.addLast(null, 0);
+            seriesActivity.addLast(null, 0);
+        }
 
         // same as above:
         LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.rgb(100, 100, 200), null, null, null);
-        //seriesFormat.setPointLabelFormatter(new PointLabelFormatter());
-//        seriesFormat.configure(getActivity().getApplicationContext(),
-//                R.xml.line_point_formatter_with_plf2);
 
         pulsePlot.addSeries(seriesPulse, seriesFormat);
         stressPlot.addSeries(seriesStress, seriesFormat);
@@ -155,11 +159,6 @@ public class FragmentIndicators extends Fragment implements View.OnTouchListener
                         DeviceInfo deviceInfo = (DeviceInfo) msg.getData().getSerializable(BluetoothService.RESPONSE_DATA);
                         if (deviceInfo != null)
                         {
-                            pulse.setText(Integer.toString(deviceInfo.chss));
-                            stress.setText(Integer.toString(deviceInfo.stressInd));
-                            activity.setText(Integer.toString(deviceInfo.aktivnost));
-                            steps.setText(Integer.toString(deviceInfo.stepsCnt));
-
                             arrayPulse.add(deviceInfo.chss);
                             arrayStress.add(deviceInfo.stressInd);
                             arrayActivity.add(deviceInfo.aktivnost);
@@ -167,6 +166,14 @@ public class FragmentIndicators extends Fragment implements View.OnTouchListener
                             seriesPulse.addLast(null, (float)deviceInfo.chss);
                             seriesStress.addLast(null, (float)deviceInfo.stressInd);
                             seriesActivity.addLast(null, (float) deviceInfo.aktivnost);
+                        }
+
+                        if (null != pulse)
+                        {
+                            pulse.setText(Integer.toString(deviceInfo.chss));
+                            stress.setText(Integer.toString(deviceInfo.stressInd));
+                            activity.setText(Integer.toString(deviceInfo.aktivnost));
+                            steps.setText(Integer.toString(deviceInfo.stepsCnt));
 
                             pulsePlot.redraw();
                             stressPlot.redraw();
@@ -224,7 +231,8 @@ public class FragmentIndicators extends Fragment implements View.OnTouchListener
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (mode == ONE_FINGER_DRAG) {
+                if (mode == ONE_FINGER_DRAG)
+                {
                     PointF oldFirstFinger = firstFinger;
                     firstFinger = new PointF(event.getX(), event.getY());
                     scroll(oldFirstFinger.x - firstFinger.x, mySimpleXYPlot);
@@ -232,14 +240,16 @@ public class FragmentIndicators extends Fragment implements View.OnTouchListener
                             BoundaryMode.FIXED);
                     mySimpleXYPlot.redraw();
 
-                } else if (mode == TWO_FINGERS_DRAG) {
-                    float oldDist = distBetweenFingers;
-                    distBetweenFingers = spacing(event);
-                    zoom(oldDist / distBetweenFingers);
-                    mySimpleXYPlot.setDomainBoundaries(minXY.x, maxXY.x,
-                            BoundaryMode.FIXED);
-                    mySimpleXYPlot.redraw();
                 }
+//
+//                else if (mode == TWO_FINGERS_DRAG) {
+//                    float oldDist = distBetweenFingers;
+//                    distBetweenFingers = spacing(event);
+//                    zoom(oldDist / distBetweenFingers);
+//                    mySimpleXYPlot.setDomainBoundaries(minXY.x, maxXY.x,
+//                            BoundaryMode.FIXED);
+//                    mySimpleXYPlot.redraw();
+//                }
                 break;
         }
         return true;

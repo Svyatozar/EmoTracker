@@ -71,6 +71,8 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
     private FragmentIndicators fragmentIndicators;
     private FragmentSettings fragmentSettings;
 
+    private static final int INFORMATION_DELAY = 5000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -251,7 +253,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
                     connectionDialog.dismiss();
                     fragmentEvents.setDeviceState(true);
                     Toast.makeText(MainActivity.this, "Bluetooth connection established", Toast.LENGTH_SHORT).show();
-                    getInformationRepeater.sendEmptyMessageDelayed(0, 5000);
+                    getInformationRepeater.sendEmptyMessageDelayed(0, INFORMATION_DELAY);
                     break;
                 case BluetoothService.MESSAGE_BLUETOOTH_CONNECT_FAILED:
                     connectionDialog.dismiss();
@@ -288,7 +290,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
             if (null != getInformationRepeater)
             {
-                getInformationRepeater.sendEmptyMessageDelayed(0, 5000);
+                getInformationRepeater.sendEmptyMessageDelayed(0, INFORMATION_DELAY);
             }
 
             return true;
