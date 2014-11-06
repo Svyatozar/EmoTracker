@@ -188,17 +188,10 @@ public class NetworkUtil
                             String errorText = new String(volleyError.networkResponse.data);
                             Log.d("LOG", "Error.Response " + errorText);
 
-                            if (errorText.contains("Email already exist"))
+                            if ((errorText.contains("Email already exist"))||(errorText.contains("Name already exist")))
                             {
-                                Toast.makeText(ApplicationWrapper.getContext(), "Ошибка при создании пользователя! Такой email уже существует", Toast.LENGTH_SHORT).show();
+                                logIn(login, callback);
                             }
-                            else
-                                if (errorText.contains("Name already exist"))
-                                {
-                                    logIn(login, callback);
-                                }
-                                else
-                                    callback.onCallback(false);
                         }
                         else
                         {
@@ -261,6 +254,10 @@ public class NetworkUtil
                             ApplicationWrapper.getSettingsProvider().writeLogin(loginId);
                             Toast.makeText(ApplicationWrapper.getContext(), "Логин уже зарегистрирован, вы авторизованы.", Toast.LENGTH_SHORT).show();
                             callback.onCallback(true);
+                        }
+                        else
+                        {
+                            callback.onCallback(false);
                         }
                     }
                 },

@@ -69,7 +69,7 @@ public class RegisterActivity extends Activity
                     }
                     else
                     {
-
+                        Toast.makeText(ApplicationWrapper.getContext(), "Ошибка! Проверьте введенные данные, и попробуйте снова.", Toast.LENGTH_SHORT).show();
                     }
                 }
             };
