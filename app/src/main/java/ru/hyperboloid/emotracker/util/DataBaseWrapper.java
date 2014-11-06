@@ -7,9 +7,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
+import ru.hyperboloid.emotracker.ApplicationWrapper;
+import ru.hyperboloid.emotracker.R;
 import ru.hyperboloid.emotracker.model.Event;
 
 /**
@@ -35,9 +41,10 @@ public class DataBaseWrapper extends SQLiteOpenHelper
     public void writeEvent(Event event)
     {
         ContentValues cv = new ContentValues();
+        Date currentTimeStamp = Calendar.getInstance().getTime();
 
         cv.put("picture", event.getImage());
-        cv.put("description", event.getDetails());
+        cv.put("description", event.getDetails() + " " + formatDate(currentTimeStamp));
         cv.put("info", event.getInfo());
         cv.put("status", event.getStatus());
 
@@ -47,7 +54,7 @@ public class DataBaseWrapper extends SQLiteOpenHelper
 
     public List<Event> readEvents()
     {
-        // делаем запрос всех данных из таблицы mytable, получаем Cursor
+        // делаем запрос всех данных из таблицы EVENTS_TABLE, получаем Cursor
         Cursor c = base.query(EVENTS_TABLE, null, null, null, null, null, null);
 
         List<Event> events = new ArrayList<Event>();
@@ -98,5 +105,12 @@ public class DataBaseWrapper extends SQLiteOpenHelper
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
+    }
+
+    public String formatDate(Date date)
+    {
+        SimpleDateFormat targetDateFormat = new SimpleDateFormat(ApplicationWrapper.getContext().getString(R.string.app_date_format), Locale.US);
+
+        return targetDateFormat.format(date);
     }
 }

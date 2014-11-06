@@ -40,6 +40,7 @@
     <string name="activity_threshold">Пороги по активности:</string>
 
     <string name="date_format">yyyy-MM-dd HH:mm:ss</string>
+    <string name="app_date_format">HH:mm:ss</string>
     <string name="please_go_register">Пожалуйста пройдите регистрацию</string>
 
     <string name="press_go">Регистрация пройдена успешно, нажмите Далее</string>
