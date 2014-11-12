@@ -14,13 +14,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
-import com.splunk.mint.Mint;
 
 import ru.hyperboloid.emotracker.ApplicationWrapper;
 import ru.hyperboloid.emotracker.MainActivity;
 import ru.hyperboloid.emotracker.R;
 import ru.hyperboloid.emotracker.interfaces.BooleanCallback;
-
 
 public class RegisterActivity extends Activity
 {
@@ -38,8 +36,7 @@ public class RegisterActivity extends Activity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        //Crashlytics.start(this);
-        Mint.initAndStartSession(RegisterActivity.this, "9ac28b61");
+        Crashlytics.start(this);
         setContentView(R.layout.activity_register);
 
         login = (TextView)findViewById(R.id.login);

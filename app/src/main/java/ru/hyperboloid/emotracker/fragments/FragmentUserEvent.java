@@ -167,26 +167,22 @@ public class FragmentUserEvent extends Fragment
 
         @Override
         public int getCount() {
-            // TODO Auto-generated method stub
             return mImage.length;
         }
 
         @Override
         public Object getItem(int position) {
-            // TODO Auto-generated method stub
             return mImage[position];
         }
 
         @Override
         public long getItemId(int position) {
-            // TODO Auto-generated method stub
             return mImage[position];
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent)
         {
-            // TODO Auto-generated method stub
             ImageView view = new ImageView(mContext);
             view.setImageResource(mImage[position]);
             view.setPadding(20, 20, 20, 20);
