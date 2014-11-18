@@ -144,39 +144,6 @@ public class FragmentIndicators extends Fragment implements GraphView.OnTouchEve
             steps.setText(stepText);
         }
 
-//        if (0 == arrayPulse.size())
-//        {
-//            arrayPulse.add(5);
-//
-//            for (int i = 0; i < 1000; i++)
-//            {
-//                if (VISIBLE == pulseSplash.getVisibility())
-//                {
-//                    pulseSplash.setVisibility(View.GONE);
-//                    stressSplash.setVisibility(View.GONE);
-//                    activitySplash.setVisibility(View.GONE);
-//                }
-//
-//                pulseText = Integer.toString(i);
-//                stressText = Integer.toString(i);
-//                activityText = Integer.toString(i);
-//                stepText = Integer.toString(i);
-//
-//                pulse.setText(pulseText);
-//                stress.setText(stressText);
-//                activity.setText(activityText);
-//                steps.setText(stepText);
-//
-//                Random rand = new Random();
-//
-//                pulseSeries.appendData(new GraphViewData(globalStepCounter,(double)rand.nextInt(500)), true);
-//                stressSeries.appendData(new GraphViewData(globalStepCounter,(double)rand.nextInt(500)), true);
-//                activitySeries.appendData(new GraphViewData(globalStepCounter,(double)rand.nextInt(500)), true);
-//
-//                globalStepCounter++;
-//            }
-//        }
-
         return rootView;
     }
 
